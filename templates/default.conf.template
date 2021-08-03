@@ -1,0 +1,145 @@
+add_header X-Frame-Options SAMEORIGIN;
+add_header X-Content-Type-Options nosniff;
+add_header X-XSS-Protection "1; mode=block";
+
+# add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; img-src 'self' data: https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src 'none'; object-src 'none'";
+
+
+# HTTPS server
+#
+server {
+    listen 80 default;
+    server_name _;
+
+    location /error/401 {
+      internal;
+      proxy_method GET;
+      proxy_pass http://${DOCKER_HOST_IP}:${BARONG_PORT}/api/v2/auth$request_uri;
+    }
+
+    # baseapp
+    location / {
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_pass http://${DOCKER_HOST_IP}:${BASEAPP_PORT}/;
+    }
+
+    location /tower {
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      error_page 401 =401 /error/401;
+      proxy_pass http://${DOCKER_HOST_IP}:8091;
+    }
+
+    location /api/v2/barong {
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      auth_request     /api/v2/auth/;
+      proxy_http_version 1.1;
+      auth_request_set $auth_header $upstream_http_authorization;
+      proxy_set_header Authorization $auth_header;
+      error_page 401 =401 /error/401;
+      proxy_set_header        X-Original-URI $request_uri;
+      proxy_pass http://${DOCKER_HOST_IP}:${BARONG_PORT}/api/v2/;
+    }
+
+    location /api/v2/auth {
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      internal;
+      proxy_pass http://${DOCKER_HOST_IP}:${BARONG_PORT}/api/v2/auth$request_uri;
+      proxy_pass_request_body off;
+      proxy_http_version 1.1;
+      proxy_set_header        Content-Length "";
+      proxy_set_header        X-Original-URI $request_uri;
+    }
+
+    location /api/v2/peatio {
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      auth_request     /api/v2/auth/;
+      auth_request_set $auth_header $upstream_http_authorization;
+      proxy_set_header Authorization $auth_header;
+      error_page 401 =401 /error/401;
+      proxy_http_version 1.1;
+      proxy_pass http://${DOCKER_HOST_IP}:${PEATIO_PORT}/api/v2/;
+    }
+
+    location /assets/ {
+      alias /home/app/assets/current/public/;
+      gzip_static on;
+      autoindex on;
+      expires 1d;
+      add_header Cache-Control "public";
+      access_log off;
+    }
+
+    # Rango
+    location ~ ^(/api/v2/ranger/public|/api/v2/ranger/private) {
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      auth_request     /api/v2/auth/;
+      auth_request_set $auth_header $upstream_http_authorization;
+      proxy_set_header Authorization $auth_header;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_pass http://${DOCKER_HOST_IP}:${RANGO_PORT};
+    }
+
+    location /liza {
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+      auth_request     /api/v2/auth/;
+      auth_request_set $auth_header $upstream_http_authorization;
+      proxy_set_header Authorization $auth_header;
+      proxy_pass http://${DOCKER_HOST_IP}:9292;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+    }
+
+    location /valera {
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+      auth_request     /api/v2/auth/;
+      auth_request_set $auth_header $upstream_http_authorization;
+      proxy_set_header Authorization $auth_header;
+      proxy_pass http://${DOCKER_HOST_IP}:9293;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+    }
+
+    location /rabbitmq {
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_pass http://${DOCKER_HOST_IP}:15672;
+    }
+
+    location /grafana {
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_pass http://${DOCKER_HOST_IP}:${BARONG_PORT};
+    }
+}

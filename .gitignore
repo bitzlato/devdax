@@ -1,2 +1,3 @@
 node_modules/
 GeoLite2-Country.mmdb
+.envrc

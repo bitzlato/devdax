@@ -12,6 +12,16 @@ services:
     ports:
       - "5432:5432"
 
+  rango:
+    image: quay.io/openware/rango:2.6.1
+    environment:
+      API_CORS_ORIGINS: localhost:8080,*
+      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+      RANGER_PORT: 8080
+      LOG_LEVEL: "debug"
+    ports:
+      - "8090:8080"
+
   influxdb:
     image: influxdb:1.7.8
     container_name: influxdb
@@ -40,11 +50,17 @@ services:
       - "15672:15672"
 
   gateway:
-    image: quay.io/datawire/ambassador:0.50.0-rc3
-    ports:
-      - "8080:80"
+    image: nginx
     volumes:
-      - ./ambassador-config:/ambassador/ambassador-config/:ro
+       - ./templates:/etc/nginx/templates
+    ports:
+       - "8080:80"
+    environment:
+      DOCKER_HOST_IP: "host.docker.internal"
+      BARONG_PORT: 3001
+      PEATIO_PORT: 3000
+      BASEAPP_PORT: 3002
+      RANGO_PORT: 8090
 
     # Good idea. But it does not work on macos because of https://docs.docker.com/docker-for-mac/networking/#there-is-no-docker0-bridge-on-macos
     # The better way it to set peatio.local and ws.local in /etc/hosts manualy

@@ -9,7 +9,10 @@ all: setup start
 
 start: deps services configure_apps
 
-setup: .envrc submodules
+setup: .envrc submodules rbenv
+
+rbenv:
+	rbenv install -s
 
 .envrc:
 	ln -s .envrc-example .envrc
@@ -33,7 +36,7 @@ deps: GeoLite2-Country.mmdb
 	direnv version
 	rbenv version
 	rbenv install -s
-	pg_config --version || brew install -q libpq
+	pg_config --version 2&> /dev/null || brew install -q libpq
 	brew install -q shared-mime-info
 
 submodules:
@@ -43,13 +46,13 @@ submodules:
 init_vault:
 	./bin/init_vault
 
-baseapp_start:
+start_baseapp:
 	cd baseapp/web; PORT=3002 yarn start
 
-peatio_start:
+start_peatio:
 	cd peatio; bundle exec foreman start
 
-barong_start:
+start_barong:
 	cd barong; bundle exec foreman start
 
 app_baseapp:

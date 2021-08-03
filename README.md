@@ -7,7 +7,13 @@ rabbitmq, ambassador в удобном для разработки виде на
 
 ## Предварительная настройка окружения
 
-Для начала у вас должен быть установлен и настроен direnv, rbenv, nvm, goenv - https://github.com/bitzlato/guides#правильно-настроенное-окружение
+Для начала у вас должен быть установлен и настроено https://github.com/bitzlato/guides#правильно-настроенное-окружение
+
+0) docker vs docker-compose
+1) direnv
+2) rbenv
+3) nvm, yarn
+4) goenv
 
 ## Установка
 
@@ -25,19 +31,19 @@ make start
 В окне терминала N1 (peatio)
 
 ```bash
-make peatio_start
+make start_peatio
 ```
 
 В окне терминала N2 (barong)
 
 ```bash
-make barong_start
+make start_barong
 ```
 
 В окне терминала N3 (baseapp)
 
 ```bash
-make baseapp_start
+make start_baseapp
 ```
 
 ## Куда смотреть как оно работает?
