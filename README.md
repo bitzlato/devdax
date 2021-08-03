@@ -1,9 +1,10 @@
 # devdax
 
-DAX от bitzlato (openware) для разработки.
+DAX (market.bitzlatl.bz) от bitzlato/openware для разработки.
 
-Запускает инфраструктуру: peatio, barong, baseapp, postgresql, vault, redis,
-rabbitmq, ambassador в удобном для разработки виде на MacOS и Linux.
+ёт вам всю нужную инфраструктуру в контейнерах (postgresql, vault, redis, rabbitmq, gateway(nginx), rango), в то время как основные проекты (peatio, baseapp, barong) разворачивает локально, подключенными к репозиторию и готовыми к разработке.
+
+Поддерживается MacOS и Linux (не проверял)
 
 ## Предварительная настройка окружения
 
