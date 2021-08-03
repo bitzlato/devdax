@@ -1,0 +1,9 @@
+[submodule "baseapp"]
+	path = baseapp
+	url = git@github.com:bitzlato/baseapp.git
+[submodule "peatio"]
+	path = peatio
+	url = git@github.com:bitzlato/peatio.git
+[submodule "barong"]
+	path = barong
+	url = git@github.com:bitzlato/barong.git
