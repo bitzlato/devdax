@@ -66,4 +66,4 @@ app_peatio:
 			bin/rake db:seed
 
 secrets:
-		bundle exec peatio security keygen --path=secrets
+	bundle exec peatio security keygen --path=secrets
