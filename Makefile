@@ -6,7 +6,7 @@ current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
 all: .envrc deps start_services init_vault install
 
 .envrc:
-	ln -s .envrc.example .envrc
+	ln -s .envrc-example .envrc
 
 install: install_baseapp install_barong install_peatio
 
