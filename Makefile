@@ -7,6 +7,7 @@ all: .envrc deps start_services init_vault install
 
 .envrc:
 	ln -s .envrc-example .envrc
+	direnv allow
 
 install: install_baseapp install_barong install_peatio
 
