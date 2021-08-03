@@ -82,5 +82,5 @@ Look into your $PATH
 
 ## TODO 
 
-1. Для линукс прописывать host.docker.internal в docker-compose.yml
+1. Для линукс добавлять `host.docker.internal` в хосты в docker-compose.yml. Или дождатья когда они включает этот хост по все поставки докера https://stackoverflow.com/questions/48546124/what-is-linux-equivalent-of-host-docker-internal
 
