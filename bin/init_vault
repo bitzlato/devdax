@@ -6,13 +6,7 @@ if [ -z "${DOCKER_VAULT_ID}" ]; then
     exit 1
 fi
 
-if [ -z "${VAULT_TOKEN}" ]; then
-    VAULT_TOKEN='changeme'
-else
-    VAULT_TOKEN=${VAULT_TOKEN}
-fi
-
-echo $VAULT_TOKEN
+echo "VAULT_TOKEN=$VAULT_TOKEN"
 
 docker exec -e "VAULT_TOKEN=${VAULT_TOKEN}" ${DOCKER_VAULT_ID} sh -c \
     "vault secrets disable secret \

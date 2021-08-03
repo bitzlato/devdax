@@ -8,9 +8,14 @@ all: deps GeoLite2-Country.mmdb submodules start_services init_vault install_bas
 GeoLite2-Country.mmdb:
 	wget -O GeoLite2-Country.mmdb https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw
 
+services: secrets stop_and_remove_services start_services init_vault
+
+stop_and_remove_services:
+	docker-compose rm -fsv
+
 start_services:
 	docker-compose up -Vd
-	docker-compose exec influxdb bash -c "cat peatio/influxdb.sql | influx"
+	docker-compose exec influxdb bash -c "cat peatio/db/influxdb.sql | influx"
 
 deps:
 	$(nvm version)
@@ -34,9 +39,11 @@ init_vault:
 	./bin/init_vault
 
 install_peatio:
-	cd peatio; rbenv install -s; bundle; ./bin/init_config; rm -f log/* log/daemons/*; bin/rake tmp:clear tmp:create; 
-	bin/rake db:create db:migrate; bin/rake db:seed
-	cd $(root)
+	cd peatio; rbenv install -s; bundle; ./bin/init_config; \
+			rm -f log/* log/daemons/*; \
+			bin/rake tmp:clear tmp:create; \
+			bin/rake db:create db:migrate; \
+			bin/rake db:seed
 
 secrets:
 		bundle exec peatio security keygen --path=secrets
