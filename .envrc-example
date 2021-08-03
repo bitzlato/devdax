@@ -29,3 +29,11 @@ export BARONG_SMTP_USER=1753e2199f0b45
 export BARONG_SMTP_LOGO_LINK=https://storage.googleapis.com/public_peatio/logo.png
 
 export ANNOTATE_SKIP_ON_DB_MIGRATE=1
+
+export WEB_CONCURRENCY=1
+export RAILS_MIN_THREADS=1
+export RAILS_MAX_THREADS=1
+
+export DISABLE_MAXMIND=true
+
+export ALLOW_ROOT_PATH=true

@@ -57,7 +57,10 @@ app_baseapp:
 	rm -f baseapp/web/public/config/env.js; ln -s env.localdev.js baseapp/web/public/config/env.js
 
 app_barong:
-	cd barong; rbenv install -s; bundle; bundle exec rake db:create db:migrate; DB=bitzlato bundle exec rake db:create db:migrate 
+	cd barong; rbenv install -s; bundle; ./bin/init_config; \
+	bundle exec rake db:create db:migrate; \
+	DB=bitzlato bundle exec rake db:create db:migrate; \
+  ./bin/rake db:seed
 
 app_peatio:
 	cd peatio; rbenv install -s; bundle; ./bin/init_config; \
