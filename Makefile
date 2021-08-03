@@ -9,10 +9,13 @@ all: setup start
 
 start: deps services configure_apps
 
-setup: .envrc submodules rbenv
+setup: .envrc submodules rbenv nvm
 
 rbenv:
 	rbenv install -s
+
+nvm:
+	nvm install
 
 .envrc:
 	ln -s .envrc-example .envrc
@@ -32,7 +35,7 @@ start_services:
 	docker-compose up -Vd
 	docker-compose exec influxdb bash -c "cat /influxdb.sql | influx"
 
-deps: GeoLite2-Country.mmdb 
+deps: GeoLite2-Country.mmdb
 	direnv version
 	rbenv version
 	rbenv install -s
