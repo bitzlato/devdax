@@ -42,13 +42,13 @@ make baseapp_start
 
 ## Куда смотреть как оно работает?
 
-Заходите в браузер http://www.app.local:8080
+Заходите в браузер http://localhost:8080
 
 ## Порты:
 
 * 8080 - висит ambasador (gateway) и маршрутиризует запросы на остальные
   сервисы согласно маршрутам прописанным в ambassador-config/mapping-peatio.yaml
-* 
+* Остальные порты смотри в ambassador-config/mapping-peatio.yaml 
 
 ## Common tasks:
 
