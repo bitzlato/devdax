@@ -83,4 +83,8 @@ Look into your $PATH
 ## TODO 
 
 1. Для линукс добавлять `host.docker.internal` в хосты в docker-compose.yml. Или дождатья когда они включает этот хост по все поставки докера https://stackoverflow.com/questions/48546124/what-is-linux-equivalent-of-host-docker-internal
-
+2. add market making (valera)
+3. add liza
+4. add tower
+5. add availability to make withdraw/deposits
+6. add testnet node
