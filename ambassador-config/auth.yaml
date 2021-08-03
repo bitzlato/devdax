@@ -2,7 +2,7 @@
 apiVersion: ambassador/v1
 kind: AuthService
 name: authentication
-auth_service: auth:8005
+auth_service: host.docker.internal:3001
 path_prefix: /auth
 proto: http
 allowed_authorization_headers:

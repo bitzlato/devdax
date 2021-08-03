@@ -44,7 +44,7 @@ init_vault:
 	./bin/init_vault
 
 baseapp_start:
-	cd baseapp/web; yarn start -p 3002
+	cd baseapp/web; PORT=3002 yarn start
 
 peatio_start:
 	cd peatio; bundle exec foreman start
@@ -53,7 +53,7 @@ barong_start:
 	cd barong; bundle exec foreman start
 
 app_baseapp:
-	cd baseapp/web; yarn install
+	cd baseapp/web; yarn install; ln -s env.localdev.env.js baseapp/web/public/config/env.js 
 
 app_barong:
 	cd barong; rbenv install -s; bundle
