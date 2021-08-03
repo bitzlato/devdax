@@ -15,7 +15,7 @@ stop_and_remove_services:
 
 start_services:
 	docker-compose up -Vd
-	docker-compose exec influxdb bash -c "cat peatio/db/influxdb.sql | influx"
+	docker-compose exec influxdb bash -c "cat /influxdb.sql | influx"
 
 deps:
 	$(nvm version)
