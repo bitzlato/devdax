@@ -48,7 +48,9 @@ make start_baseapp
 
 ## Куда смотреть как оно работает?
 
-Заходите в браузер http://localhost:8080
+```bash
+open http://localhost:8080
+```
 
 ## Порты:
 
