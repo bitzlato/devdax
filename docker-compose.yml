@@ -1,0 +1,81 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres:13.3
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASS}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+
+  influxdb:
+    image: influxdb:1.7.8
+    container_name: influxdb
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    volumes:
+      - ./peatio/db/influxdb.sql:/influxdb.sql
+      - influx_data:/var/lib/influxdb
+    environment:
+       INFLUXDB_ADMIN_ENABLED: "true"
+
+  redis:
+    image: redis:4.0
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:3.7.6-management
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  gateway:
+    image: quay.io/datawire/ambassador:0.50.0-rc3
+    ports:
+      - "8080:80"
+    depends_on:
+      - auth
+    volumes:
+      - ./ambassador-config:/ambassador/ambassador-config/:ro
+
+    # Good idea. But it does not work on macos because of https://docs.docker.com/docker-for-mac/networking/#there-is-no-docker0-bridge-on-macos
+    # The better way it to set peatio.local and ws.local in /etc/hosts manualy
+    #
+    # Uncomment to have auto host setup in linux
+    #
+    # entrypoint:
+    #  - sh
+    #  - -exc
+    #  - |
+    #    # Allow accessing host's 0.0.0.0 so we can connect to a local peatio
+    #    # from the gateway container
+    #    ip -4 route list match 0/0 | awk '{print $$3" peatio.local"}' >> /etc/hosts
+    #    ip -4 route list match 0/0 | awk '{print $$3" ws.local"}' >> /etc/hosts
+    #    # Continue with the default entrypoint
+    #    ./entrypoint.sh
+
+  vault:
+    image: vault:1.0.1
+    ports:
+      - "8200:8200"
+    environment:
+      SKIP_SETCAP: 1
+      VAULT_TOKEN: ${VAULT_TOKEN}
+      VAULT_DEV_ROOT_TOKEN_ID: changeme
+      VAULT_ADDR: http://vault:8200
+
+volumes:
+  influx_data:
+  db_data:
+  rabbitmq_data:
+  redis_data:
