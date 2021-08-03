@@ -53,10 +53,11 @@ barong_start:
 	cd barong; bundle exec foreman start
 
 app_baseapp:
-	cd baseapp/web; yarn install; ln -s env.localdev.env.js baseapp/web/public/config/env.js 
+	cd baseapp/web; yarn install
+	rm -f baseapp/web/public/config/env.js; ln -s env.localdev.js baseapp/web/public/config/env.js
 
 app_barong:
-	cd barong; rbenv install -s; bundle
+	cd barong; rbenv install -s; bundle; bundle exec rake db:create db:migrate; DB=bitzlato bundle exec rake db:create db:migrate 
 
 app_peatio:
 	cd peatio; rbenv install -s; bundle; ./bin/init_config; \

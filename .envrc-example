@@ -27,3 +27,5 @@ export BARONG_SMTP_PORT=25
 export BARONG_SMTP_USER=1753e2199f0b45
 # export BARONG_SMTP_PASSWORD=CHANGE_ME
 export BARONG_SMTP_LOGO_LINK=https://storage.googleapis.com/public_peatio/logo.png
+
+export ANNOTATE_SKIP_ON_DB_MIGRATE=1
