@@ -9,7 +9,7 @@ rabbitmq, ambassador в удобном для разработки виде на
 
 1. Для начала у вас должен быть установлен и настроен direnv, rbenv, nvm, goenv - https://github.com/bitzlato/guides#правильно-настроенное-окружение
 
-2. Должны быть прописаны локальные хосты: `peatio.local ws.local www.app.local` в
+2. Должны быть прописаны локальные хосты: `peatio.local ws.local` в
    /etc/hosts (для macos это /etc/private/hosts) на сетевой IP-адрес (НЕ
    localhost)
 
@@ -79,3 +79,10 @@ make services
 Install gem pg for mac and linux - https://wikimatze.de/installing-postgresql-gem-under-ubuntu-and-mac/
 
 Look into your $PATH
+
+
+## FAQ
+
+1. Почему идем на localhost:8080 а не на www.app.local?
+
+> app.local по умолчанию был на http, а auth0 принимает либо localhost либо https
