@@ -3,7 +3,10 @@ current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
 
 # TODO check VAULT_TOKEN, JWT_SECERTS and DATABASE_PASSWORD
 #
-all: deps start_services init_vault install
+all: .envrc deps start_services init_vault install
+
+.envrc:
+	ln -s .envrc.example .envrc
 
 install: install_baseapp install_barong install_peatio
 

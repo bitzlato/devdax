@@ -1,0 +1,29 @@
+export VAULT_TOKEN=changeme
+
+export DATABASE_ADAPTER=postgresql
+export DATABASE_PORT=5432
+export DATABASE_USER=postgres
+export DATABASE_PASS=password
+
+if [[ $OSTYPE == 'darwin'* ]]; then
+  # For Macos
+  export JWT_PUBLIC_KEY=$(cat secrets/rsa-key.pub| base64 -b0)
+  export JWT_PRIVATE_KEY=$(cat secrets/rsa-key| base64 -b0)
+else
+  # For Linux
+  export JWT_PUBLIC_KEY=$(cat secrets/rsa-key.pub| base64 -w0)
+  export JWT_PRIVATE_KEY=$(cat secrets/rsa-key| base64 -w0)
+fi
+export JWT_PRIVATE_KEY_PATH=$(pwd)/secrets/rsa-key
+
+# For psql
+export PGHOST=127.0.0.1
+export PGUSER=${DATABASE_USER}
+
+export BARONG_MAXMINDDB_PATH=$(pwd)/GeoLite2-Country.mmdb
+
+export BARONG_SMTP_HOST=smtp.mailtrap.io
+export BARONG_SMTP_PORT=25
+export BARONG_SMTP_USER=1753e2199f0b45
+# export BARONG_SMTP_PASSWORD=CHANGE_ME
+export BARONG_SMTP_LOGO_LINK=https://storage.googleapis.com/public_peatio/logo.png
