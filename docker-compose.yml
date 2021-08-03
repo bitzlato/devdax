@@ -43,8 +43,6 @@ services:
     image: quay.io/datawire/ambassador:0.50.0-rc3
     ports:
       - "8080:80"
-    depends_on:
-      - auth
     volumes:
       - ./ambassador-config:/ambassador/ambassador-config/:ro
 

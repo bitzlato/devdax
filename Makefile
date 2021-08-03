@@ -3,7 +3,7 @@ current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
 
 # TODO check VAULT_TOKEN, JWT_SECERTS and DATABASE_PASSWORD
 #
-all: deps GeoLite2-Country.mmdb submodules install_baseapp install_barong install_peatio start_services
+all: deps GeoLite2-Country.mmdb submodules start_services init_vault install_baseapp install_barong install_peatio
 
 GeoLite2-Country.mmdb:
 	wget -O GeoLite2-Country.mmdb https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw
@@ -25,23 +25,18 @@ submodules:
 	git submodule update
 
 install_baseapp:
-	cd baseapp/web
-	yarn install
-	cd $(root)
+	cd baseapp/web; yarn install
 
 install_barong:
 	cd barong; rbenv install -s; bundle
-	pwd
-	cd $(root)
+
+init_vault:
+	./bin/init_vault
 
 install_peatio:
-	cd peatio
-	rbenv install -s
-	bundle
-	./bin/init_config
-	rm -f log/* log/daemons/*
-	bin/rake tmp:clear tmp:create
-	bundle exec peatio security keygen --path=config/secrets
-	bin/init_vault
+	cd peatio; rbenv install -s; bundle; ./bin/init_config; rm -f log/* log/daemons/*; bin/rake tmp:clear tmp:create; 
 	bin/rake db:create db:migrate; bin/rake db:seed
 	cd $(root)
+
+secrets:
+		bundle exec peatio security keygen --path=secrets
