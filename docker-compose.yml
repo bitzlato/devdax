@@ -18,6 +18,7 @@ services:
       API_CORS_ORIGINS: localhost:8080,*
       JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
       RANGER_PORT: 8080
+      RABBITMQ_HOST: "rabbitmq"
       LOG_LEVEL: "debug"
     ports:
       - "8090:8080"
