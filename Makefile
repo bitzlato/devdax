@@ -44,7 +44,7 @@ init_vault:
 	./bin/init_vault
 
 baseapp_start:
-	cd baseapp/web; yarn start
+	cd baseapp/web; yarn start -p 3002
 
 peatio_start:
 	cd peatio; bundle exec foreman start

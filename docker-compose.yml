@@ -57,8 +57,7 @@ services:
     #  - |
     #    # Allow accessing host's 0.0.0.0 so we can connect to a local peatio
     #    # from the gateway container
-    #    ip -4 route list match 0/0 | awk '{print $$3" peatio.local"}' >> /etc/hosts
-    #    ip -4 route list match 0/0 | awk '{print $$3" ws.local"}' >> /etc/hosts
+    #    ip -4 route list match 0/0 | awk '{print $$3" host.docker.internal"}' >> /etc/hosts
     #    # Continue with the default entrypoint
     #    ./entrypoint.sh
 

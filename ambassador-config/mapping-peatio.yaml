@@ -5,7 +5,7 @@ name: peatio_app_mapping
 host: localhost:8080
 prefix: /
 rewrite: /
-service: peatio.local:3002
+service: host.docker.internal:3002
 
 ---
 apiVersion: ambassador/v1
@@ -14,7 +14,7 @@ name: peatio_api_mapping
 host: localhost:8080
 prefix: /api/peatio/v2/
 rewrite: /api/v2/
-service: peatio.local:3000
+service: host.docker.internal:3000
 
 ---
 apiVersion: ambassador/v1
@@ -23,7 +23,7 @@ name: barong_api_mapping
 host: localhost:8080
 prefix: /api/barong/v2/
 rewrite: /api/v2/
-service: peatio.local:3001
+service: host.docker.internal:3001
 
 ---
 apiVersion: ambassador/v1
@@ -33,4 +33,4 @@ host: localhost:8080
 use_websocket: true
 prefix: /api/ranger/v2/
 rewrite: /
-service: ws.local:8081
+service: host.docker.internal:8081
