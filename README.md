@@ -1,14 +1,14 @@
 # devdax
 
-DAX (market.bitzlatl.bz) from bitzlato/openware for development purposes.
+DAX (market.bitzlatl.bz) introduced by bitzlato/openware for development purposes.
 
-It allows you to use all necessary environment in docker-containers (postgresql, vault, redis, rabbitmq, gateway(nginx), rango), meanwhile main packages (peatio, baseapp, barong) running locally with prepared connection to repository and ready for development.
+Deploys all neccessary infra parts in containers (postgresql, vault, redis, rabbitmq, gateway(nginx), rango), at the same time basic projects (peatio, baseapp, barong) deploys locally as submodules, binded to repositories and ready to use.
 
 MacOS is supported. Linux is not tested.
 
-## Environments presettings
+## Initial environment setup
 
-You should have installed and configured dev environment https://github.com/bitzlato/guides#правильно-настроенное-окружение
+You are expected to have the following installed and configured: https://github.com/bitzlato/guides#правильно-настроенное-окружение
 
 0. docker vs docker-compose
 1. direnv
@@ -25,34 +25,39 @@ Get submodules
 git submodule update --init --recursive
 ```
 
-Start autoconfiguration:
+Run services auto-deploy as follows:
 
 ```bash
 make setup
 make start
 ```
 
-## Run main packages
+## Run basic apps (don't confuse with Baseapp application only)
 
-1st terminal session (peatio)
+Have 3 instances of terminals running mentioned as respectively:
+- N1 - peatio
+- N2 - barong
+- N3 - baseapp
+
+In N1 terminal console (peatio) run
 
 ```bash
 make start_peatio
 ```
 
-2nd terminal session (barong)
+In N2 terminal console (barong) run
 
 ```bash
 make start_barong
 ```
 
-3rd terminal session (baseapp)
+In N3 terminal console (baseapp) run
 
 ```bash
 make start_baseapp
 ```
 
-## Where to check it
+## Check if infra is running
 
 ```bash
 open http://localhost:8080
@@ -60,9 +65,9 @@ open http://localhost:8080
 
 ## Ports:
 
-* 8080 - running ambasador (gateway). It is routing requests to other services
-  according to routing table in ambassador-config/mapping-peatio.yaml
-* Other ports you can find in ambassador-config/mapping-peatio.yaml 
+* 8080 - ambasador (gateway) listens the port and proxies requests to other parts of infra.
+  Proxying is performed according to routes specified in `ambassador-config/mapping-peatio.yaml`
+* Please check the rest of the ports in `ambassador-config/mapping-peatio.yaml` 
 
 ## Common tasks:
 
@@ -80,13 +85,13 @@ Look into your $PATH
 
 ## FAQ
 
-1. Why it is running on localhost:8080 not www.app.local?
+1. Why do we listen on `localhost:8080` not `www.app.local`?
 
-> app.local is on http by default, but auth0 accepts localhost or https
+> app.local by default was on http, but auth0 accepts only localhost or https
 
 ## TODO
 
-1. On linux add `host.docker.internal` to hosts in docker-compose.yml. Or wait until developers will include it to docker setup. https://stackoverflow.com/questions/48546124/what-is-linux-equivalent-of-host-docker-internal
+1. On Linux, either do list `host.docker.internal` within hosts of `docker-compose.yml`. Or keep standing by for them to include this host to all releases of docker https://stackoverflow.com/questions/48546124/what-is-linux-equivalent-of-host-docker-internal
 2. add market making (valera)
 3. add liza
 4. add tower
