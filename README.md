@@ -10,12 +10,13 @@ MacOS is supported. Linux is not tested.
 
 You should have installed and configured dev environment https://github.com/bitzlato/guides#правильно-настроенное-окружение
 
-0) docker vs docker-compose
-1) direnv
-2) rbenv
-3) nvm, yarn
-4) goenv
-5) wget
+0. docker vs docker-compose
+1. direnv
+2. rbenv
+3. nvm, yarn
+4. goenv
+5. wget
+
 
 ## Installation
 
@@ -27,8 +28,6 @@ git submodule update --init --recursive
 Start autoconfiguration:
 
 ```bash
-rbenv install -s
-nvm install
 make setup
 make start
 ```
@@ -63,7 +62,6 @@ open http://localhost:8080
 
 * 8080 - running ambasador (gateway). It is routing requests to other services
   according to routing table in ambassador-config/mapping-peatio.yaml
-
 * Other ports you can find in ambassador-config/mapping-peatio.yaml 
 
 ## Common tasks:
@@ -80,15 +78,13 @@ Install gem pg for mac and linux - https://wikimatze.de/installing-postgresql-ge
 
 Look into your $PATH
 
-
 ## FAQ
 
 1. Why it is running on localhost:8080 not www.app.local?
 
 > app.local is on http by default, but auth0 accepts localhost or https
 
-
-## TODO 
+## TODO
 
 1. On linux add `host.docker.internal` to hosts in docker-compose.yml. Or wait until developers will include it to docker setup. https://stackoverflow.com/questions/48546124/what-is-linux-equivalent-of-host-docker-internal
 2. add market making (valera)
