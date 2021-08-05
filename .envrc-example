@@ -41,3 +41,7 @@ export ALLOW_ROOT_PATH=true
 export DATABASE_POOL=50
 
 export WHITELISTED_IPS=127.0.0.1,172.0.0.0/8
+
+# give values from baseapp/web/public/config/env.js
+export BARONG_AUTH0_CLIENT_ID=OL926gD0Zha6h80uJx4TVhJLMKrJemjb
+export BARONG_AUTH0_DOMAIN=bitzlato-dev.auth0.com
