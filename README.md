@@ -75,7 +75,7 @@ make start_baseapp
 ## How to check it
 
 ```bash
-open http://localhost:8080
+open http://localhost:8080/signin/auth0.html
 ```
 
 ## Ports:
