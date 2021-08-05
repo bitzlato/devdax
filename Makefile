@@ -5,9 +5,9 @@ current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
 # TODO check *env
 # TODO check hosts
 
-all: setup start
+all: deps setup start
 
-start: deps services configure_apps
+start: services configure_apps
 
 setup: .envrc submodules rbenv nvm
 
