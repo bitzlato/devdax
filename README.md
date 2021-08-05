@@ -80,7 +80,7 @@ open http://localhost:8080/signin/auth0.html
 
 ## Ports:
 
-* 8080 - running ambasador (gateway). It is routing requests to other services
+* 8080 - gateway (nginx). It is routing requests to other services
   according to routing table in ambassador-config/mapping-peatio.yaml
 * Other ports you can find in ambassador-config/mapping-peatio.yaml 
 
