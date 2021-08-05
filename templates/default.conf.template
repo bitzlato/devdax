@@ -75,6 +75,7 @@ server {
       proxy_pass http://${DOCKER_HOST_IP}:${PEATIO_PORT}/api/v2/;
     }
 
+    # TODO
     location /assets/ {
       alias /home/app/assets/current/public/;
       gzip_static on;
