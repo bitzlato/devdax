@@ -47,6 +47,7 @@ server {
       error_page 401 =401 /error/401;
       proxy_set_header        X-Original-URI $request_uri;
       proxy_pass http://${DOCKER_HOST_IP}:${BARONG_PORT}/api/v2/;
+      proxy_cookie_path / "/; Secure";
     }
 
     location /api/v2/auth {
