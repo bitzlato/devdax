@@ -15,7 +15,7 @@ rbenv:
 	rbenv install -s
 
 nvm:
-	nvm install
+	. ${NVM_DIR}/nvm.sh && nvm install
 
 .envrc:
 	ln -s .envrc-example .envrc
