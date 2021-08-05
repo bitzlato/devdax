@@ -55,18 +55,23 @@ start_light:
 			cd baseapp/web; PORT=3002 yarn start
 
 start_baseapp:
+	echo -n -e "\033]0;baseapp\007"
 	cd baseapp/web; PORT=3002 yarn start
 
 start_peatio:
+	echo -n -e "\033]0;peatio\007"
 	cd peatio; bundle exec foreman start
 
 start_barong:
+	echo -n -e "\033]0;barong\007"
 	cd barong; bundle exec foreman start
 
 start_peatio_web:
+	echo -n -e "\033]0;peatio_web\007"
 	cd peatio; bundle exec foreman start web
 
 start_barong_web:
+	echo -n -e "\033]0;barong_web\007"
 	cd barong; bundle exec foreman start web
 
 app_baseapp:
