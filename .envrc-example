@@ -39,3 +39,5 @@ export DISABLE_MAXMIND=true
 export ALLOW_ROOT_PATH=true
 
 export DATABASE_POOL=50
+
+export WHITELISTED_IPS=127.0.0.1,172.0.0.0/8
