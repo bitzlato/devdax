@@ -25,14 +25,14 @@ Get submodules
 git submodule update --init --recursive
 ```
 
-Start autoconfiguration:
+Configure and start full infra:
 
 ```bash
 make setup
 make start
 ```
 
-## Run main packages
+## Run main apps
 
 1st terminal session (peatio)
 
@@ -52,7 +52,27 @@ make start_barong
 make start_baseapp
 ```
 
-## Where to check it
+## Run main apps in light mode (only web, no daemons)
+
+1st terminal session (peatio)
+
+```bash
+make start_peatio_web
+```
+
+2nd terminal session (barong)
+
+```bash
+make start_barong_web
+```
+
+3rd terminal session (baseapp)
+
+```bash
+make start_baseapp
+```
+
+## How to check it
 
 ```bash
 open http://localhost:8080

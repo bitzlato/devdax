@@ -50,6 +50,10 @@ submodules:
 init_vault:
 	./bin/init_vault
 
+start_light:
+		start_baseapp:
+			cd baseapp/web; PORT=3002 yarn start
+
 start_baseapp:
 	cd baseapp/web; PORT=3002 yarn start
 
@@ -58,6 +62,12 @@ start_peatio:
 
 start_barong:
 	cd barong; bundle exec foreman start
+
+start_peatio_web:
+	cd peatio; bundle exec foreman start web
+
+start_barong_web:
+	cd barong; bundle exec foreman start web
 
 app_baseapp:
 	cd baseapp/web; yarn install
