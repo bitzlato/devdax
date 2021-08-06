@@ -17,7 +17,6 @@ You should have installed and configured dev environment https://github.com/bitz
 4. goenv
 5. wget
 
-
 ## Installation
 
 Get submodules
@@ -70,6 +69,14 @@ make start_barong_web
 
 ```bash
 make start_baseapp
+```
+
+## Run only web app with proxy
+
+The fastest way to start developing the frontend. Requires only baseapp and working staging server as a backend. The following command will run webpack-dev-server with proxying of API requests to the staging server.
+
+```bash
+make start_baseapp_proxy [PROXY_HOST=ex-stage.bitzlato.bz]
 ```
 
 ## How to check it
