@@ -1,5 +1,6 @@
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
+PROXY_HOST := "ex-stage.bitzlato.bz"
 
 # TODO check VAULT_TOKEN, JWT_SECERTS and DATABASE_PASSWORD
 # TODO check *env
@@ -50,13 +51,14 @@ submodules:
 init_vault:
 	./bin/init_vault
 
-start_light:
-		start_baseapp:
-			cd baseapp/web; PORT=3002 yarn start
-
 start_baseapp:
 	echo -n -e "\033]0;baseapp\007"
 	cd baseapp/web; PORT=3002 yarn start
+
+start_baseapp_proxy:
+	echo -n -e "\033]0;baseapp_proxy\007"
+	cd baseapp/web; \
+	PORT=8080 PROXY_HOST=$(PROXY_HOST) yarn start
 
 start_peatio:
 	echo -n -e "\033]0;peatio\007"
