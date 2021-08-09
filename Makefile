@@ -6,9 +6,7 @@ PROXY_HOST := "ex-stage.bitzlato.bz"
 # TODO check *env
 # TODO check hosts
 
-all: deps setup start
-
-start: services configure_apps
+all: deps setup start services configure_apps
 
 setup: .envrc submodules rbenv nvm
 

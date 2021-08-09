@@ -24,14 +24,13 @@ Get submodules
 git submodule update --init --recursive
 ```
 
-Configure and start full infra:
+Configure and start dependency services:
 
 ```bash
-make setup
-make start
+make
 ```
 
-## Run main apps
+## Run developing apps
 
 1st terminal session (peatio)
 
