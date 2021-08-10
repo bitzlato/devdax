@@ -7,3 +7,6 @@
 [submodule "barong"]
 	path = barong
 	url = git@github.com:bitzlato/barong.git
+[submodule "rango"]
+	path = rango
+	url = git@github.com:bitzlato/rango.git

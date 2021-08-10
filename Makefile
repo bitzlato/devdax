@@ -6,7 +6,7 @@ PROXY_HOST := "ex-stage.bitzlato.bz"
 # TODO check *env
 # TODO check hosts
 
-all: deps setup start services configure_apps
+all: deps setup services configure_apps
 
 setup: .envrc submodules rbenv nvm
 
@@ -73,6 +73,9 @@ start_peatio_web:
 start_barong_web:
 	echo -n -e "\033]0;barong_web\007"
 	cd barong; bundle exec foreman start web
+
+start_rango:
+	cd rango; go run ./cmd/rango
 
 app_baseapp:
 	cd baseapp/web; yarn install
