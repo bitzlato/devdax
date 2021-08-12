@@ -6,7 +6,8 @@ PROXY_HOST := "ex-stage.bitzlato.bz"
 # TODO check *env
 # TODO check hosts
 
-all: deps setup start_services configure_apps
+all: deps setup services configure_apps
+linux: deps_linux setup services configure_apps
 
 setup: .envrc submodules rbenv nvm
 
@@ -17,7 +18,7 @@ nvm:
 	. ${NVM_DIR}/nvm.sh && nvm install
 
 .envrc:
-	ln -s .envrc-example .envrc
+	cp -n .envrc-example .envrc
 	direnv allow
 
 configure_apps: app_baseapp app_barong app_peatio
@@ -41,6 +42,11 @@ deps: GeoLite2-Country.mmdb
 	rbenv install -s
 	pg_config --version 2&> /dev/null || brew install -q libpq
 	brew install -q shared-mime-info
+
+deps_linux: GeoLite2-Country.mmdb
+	direnv version
+	rbenv version
+	rbenv install -s
 
 submodules:
 	git submodule init
@@ -73,6 +79,9 @@ start_peatio_web:
 start_barong_web:
 	echo -n -e "\033]0;barong_web\007"
 	cd barong; bundle exec foreman start web
+
+start_rango:
+	cd rango; go run ./cmd/rango
 
 app_baseapp:
 	cd baseapp/web; yarn install
