@@ -12,5 +12,13 @@ docker exec -e "VAULT_TOKEN=${VAULT_TOKEN}" ${DOCKER_VAULT_ID} sh -c \
     "vault secrets disable secret \
     && vault secrets enable -path=secret -version=1 kv \
     && vault secrets enable transit \
-    && vault secrets enable totp"
+    && vault secrets enable totp \
+    && vault policy write barong /tmp/policies/barong.hcl \
+    && vault policy write finex_engine /tmp/policies/finex_engine.hcl \
+    && vault policy write kaigara /tmp/policies/kaigara.hcl \
+    && vault policy write peatio_crypto /tmp/policies/peatio_crypto.hcl \
+    && vault policy write peatio_matching /tmp/policies/peatio_matching.hcl \
+    && vault policy write peatio_rails /tmp/policies/peatio_rails.hcl \
+    && vault policy write peatio_upstream /tmp/policies/peatio_upstream.hcl \
+    && vault policy write sonic /tmp/policies/sonic.hcl"
 
