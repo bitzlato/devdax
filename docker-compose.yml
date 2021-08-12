@@ -12,17 +12,6 @@ services:
     ports:
       - "5432:5432"
 
-  rango:
-    image: quay.io/openware/rango:2.6.1
-    environment:
-      API_CORS_ORIGINS: localhost:8080,*
-      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
-      RANGER_PORT: 8080
-      RABBITMQ_HOST: "rabbitmq"
-      LOG_LEVEL: "debug"
-    ports:
-      - "8090:8080"
-
   influxdb:
     image: influxdb:1.7.8
     container_name: influxdb
