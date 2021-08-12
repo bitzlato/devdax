@@ -7,6 +7,7 @@ PROXY_HOST := "ex-stage.bitzlato.bz"
 # TODO check hosts
 
 all: deps setup services configure_apps
+linux: deps_linux setup services configure_apps
 
 setup: .envrc submodules rbenv nvm
 
@@ -41,6 +42,11 @@ deps: GeoLite2-Country.mmdb
 	rbenv install -s
 	pg_config --version 2&> /dev/null || brew install -q libpq
 	brew install -q shared-mime-info
+
+deps_linux: GeoLite2-Country.mmdb
+	direnv version
+	rbenv version
+	rbenv install -s
 
 submodules:
 	git submodule init

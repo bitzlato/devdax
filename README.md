@@ -24,10 +24,16 @@ Get submodules
 git submodule update --init --recursive
 ```
 
-Configure and start dependency services:
+Configure and start dependency services on MacOS:
 
 ```bash
 make
+```
+
+on Linux:
+
+```bash
+make linux
 ```
 
 ## Run developing apps
