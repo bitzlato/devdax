@@ -21,7 +21,7 @@ nvm:
 	cp -n .envrc-example .envrc
 	direnv allow
 
-configure_apps: app_baseapp app_barong app_peatio
+configure_apps: app_baseapp app_barong app_peatio app_liza
 
 GeoLite2-Country.mmdb:
 	wget -O - https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw | tar -xz --strip-components 1 "GeoLite2-Country_*/GeoLite2-Country.mmdb"
@@ -83,15 +83,19 @@ start_barong_web:
 start_rango:
 	cd rango; go run ./cmd/rango
 
+start_liza:
+	cd liza; bundle exec foreman start
+
 app_baseapp:
 	cd baseapp/web; yarn install
 	rm -f baseapp/web/public/config/env.js; ln -s env.localdev.js baseapp/web/public/config/env.js
 
 app_barong:
 	cd barong; rbenv install -s; bundle; ./bin/init_config; \
-	bundle exec rake db:create db:migrate; \
-	DB=bitzlato bundle exec rake db:create db:migrate; \
-  ./bin/rake db:seed
+		bundle exec rake db:create db:migrate; \
+		DB=bitzlato bundle exec rake db:create db:migrate; \
+		./bin/rake db:seed; \
+		bundle exec rails runner "%w[superadmin admin accountant member].each { |role| Permission.create!(action: 'ACCEPT', role: role, verb: 'ALL', path: 'liza') unless Permission.exists?(role: role, path: 'liza') }"
 
 app_peatio:
 	cd peatio; rbenv install -s; bundle; ./bin/init_config; \
@@ -99,6 +103,12 @@ app_peatio:
 			bin/rake tmp:clear tmp:create; \
 			bin/rake db:create db:migrate; \
 			bin/rake db:seed
+
+app_liza:
+	cd liza; git submodule init; git submodule update; \
+		rbenv install -s; bundle; \
+		bundle exec rails db:setup; \
+		yarn install
 
 secrets:
 	bundle exec peatio security keygen --path=secrets
