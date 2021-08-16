@@ -34,8 +34,6 @@ export WEB_CONCURRENCY=1
 export RAILS_MIN_THREADS=1
 export RAILS_MAX_THREADS=1
 
-export DISABLE_MAXMIND=true
-
 export ALLOW_ROOT_PATH=true
 
 export DATABASE_POOL=50
