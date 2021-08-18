@@ -102,14 +102,14 @@ server {
     }
 
     location /liza {
-    proxy_set_header Host $http_host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
       auth_request     /api/v2/auth/;
       auth_request_set $auth_header $upstream_http_authorization;
       proxy_set_header Authorization $auth_header;
-      proxy_pass http://${DOCKER_HOST_IP}:9292;
+      proxy_pass http://${DOCKER_HOST_IP}:${LIZA_PORT};
       proxy_http_version 1.1;
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection "upgrade";

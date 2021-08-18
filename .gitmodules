@@ -10,3 +10,6 @@
 [submodule "rango"]
 	path = rango
 	url = git@github.com:bitzlato/rango.git
+[submodule "liza"]
+	path = liza
+	url = git@github.com:bitzlato/liza.git

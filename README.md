@@ -62,6 +62,11 @@ make start_baseapp
 make start_rango
 ```
 
+5th terminal session (liza)
+```bash
+make start_liza
+```
+
 ## Run main apps in light mode (only web, no daemons)
 
 1st terminal session (peatio)
@@ -100,7 +105,7 @@ open http://localhost:8080/signin/auth0.html
 
 * 8080 - gateway (nginx). It is routing requests to other services
   according to routing table in ambassador-config/mapping-peatio.yaml
-* Other ports you can find in ambassador-config/mapping-peatio.yaml 
+* Other ports you can find in ambassador-config/mapping-peatio.yaml
 
 ## Common tasks
 
