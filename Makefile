@@ -52,8 +52,7 @@ deps_linux: GeoLite2-Country.mmdb_linux
 	rbenv install -s
 
 submodules:
-	git submodule init
-	git submodule update
+	git submodule update --init --recursive
 
 init_vault:
 	./bin/init_vault

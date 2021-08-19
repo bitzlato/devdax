@@ -19,11 +19,6 @@ You should have installed and configured dev environment https://github.com/bitz
 
 ## Installation
 
-Get submodules
-```bash
-git submodule update --init --recursive
-```
-
 Configure and start dependency services on MacOS:
 
 ```bash
