@@ -42,7 +42,6 @@ start_services:
 deps: GeoLite2-Country.mmdb
 	direnv version
 	rbenv version
-	rbenv install -s
 	pg_config --version 2&> /dev/null || brew install -q libpq
 	brew install -q shared-mime-info
 
@@ -52,8 +51,7 @@ deps_linux: GeoLite2-Country.mmdb_linux
 	rbenv install -s
 
 submodules:
-	git submodule init
-	git submodule update
+	git submodule update --init --recursive
 
 init_vault:
 	./bin/init_vault
@@ -105,11 +103,10 @@ app_barong:
 		bundle exec rails runner "%w[superadmin admin accountant member].each { |role| Permission.create!(action: 'ACCEPT', role: role, verb: 'ALL', path: 'valera') unless Permission.exists?(role: role, path: 'valera') }"
 
 app_peatio:
-	cd peatio; rbenv install -s; bundle; ./bin/init_config; \
+	cd peatio; rbenv install -s; bundle; \
 			rm -f log/* log/daemons/*; \
 			bin/rake tmp:clear tmp:create; \
-			bin/rake db:create db:migrate; \
-			bin/rake db:seed
+			bin/rake db:setup
 
 app_liza:
 	cd liza; git submodule init; git submodule update; \
