@@ -26,6 +26,9 @@ configure_apps: app_baseapp app_barong app_peatio app_liza
 GeoLite2-Country.mmdb:
 	wget -O - https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw | tar -xz --strip-components 1 "GeoLite2-Country_*/GeoLite2-Country.mmdb"
 
+GeoLite2-Country.mmdb_linux:
+	wget -O - https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw | tar -xz --strip-components 1 --wildcards "GeoLite2-Country_*/GeoLite2-Country.mmdb"
+
 services: secrets stop_and_remove_services start_services init_vault
 
 stop_and_remove_services:
@@ -43,7 +46,7 @@ deps: GeoLite2-Country.mmdb
 	pg_config --version 2&> /dev/null || brew install -q libpq
 	brew install -q shared-mime-info
 
-deps_linux: GeoLite2-Country.mmdb
+deps_linux: GeoLite2-Country.mmdb_linux
 	direnv version
 	rbenv version
 	rbenv install -s
