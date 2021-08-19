@@ -19,11 +19,6 @@ You should have installed and configured dev environment https://github.com/bitz
 
 ## Installation
 
-Get submodules
-```bash
-git submodule update --init --recursive
-```
-
 Configure and start dependency services on MacOS:
 
 ```bash
@@ -63,8 +58,15 @@ make start_rango
 ```
 
 5th terminal session (liza)
+
 ```bash
 make start_liza
+```
+
+6th terminal session (valera)
+
+```bash
+make start_valera
 ```
 
 ## Run main apps in light mode (only web, no daemons)
@@ -155,7 +157,6 @@ Account.find_each { |a| a.update_columns balance: 10000, locked: 1000 }
 ## TODO
 
 1. On linux add `host.docker.internal` to hosts in docker-compose.yml. Or wait until developers will include it to docker setup. https://stackoverflow.com/questions/48546124/what-is-linux-equivalent-of-host-docker-internal
-1. add market making (valera)
-1. add liza
 1. add availability to make withdraw/deposits
 1. add testnet node
+1. Add peatio creadentials for valera accounts

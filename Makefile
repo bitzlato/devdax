@@ -21,10 +21,13 @@ nvm:
 	cp -n .envrc-example .envrc
 	direnv allow
 
-configure_apps: app_baseapp app_barong app_peatio app_liza
+configure_apps: app_baseapp app_barong app_peatio app_liza app_valera
 
 GeoLite2-Country.mmdb:
 	wget -O - https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw | tar -xz --strip-components 1 "GeoLite2-Country_*/GeoLite2-Country.mmdb"
+
+GeoLite2-Country.mmdb_linux:
+	wget -O - https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw | tar -xz --strip-components 1 --wildcards "GeoLite2-Country_*/GeoLite2-Country.mmdb"
 
 services: secrets stop_and_remove_services start_services init_vault
 
@@ -39,18 +42,16 @@ start_services:
 deps: GeoLite2-Country.mmdb
 	direnv version
 	rbenv version
-	rbenv install -s
 	pg_config --version 2&> /dev/null || brew install -q libpq
 	brew install -q shared-mime-info
 
-deps_linux: GeoLite2-Country.mmdb
+deps_linux: GeoLite2-Country.mmdb_linux
 	direnv version
 	rbenv version
 	rbenv install -s
 
 submodules:
-	git submodule init
-	git submodule update
+	git submodule update --init --recursive
 
 init_vault:
 	./bin/init_vault
@@ -86,6 +87,9 @@ start_rango:
 start_liza:
 	cd liza; bundle exec foreman start
 
+start_valera:
+	cd valera; bundle exec foreman start
+
 app_baseapp:
 	cd baseapp/web; yarn install
 	rm -f baseapp/web/public/config/env.js; ln -s env.localdev.js baseapp/web/public/config/env.js
@@ -95,20 +99,24 @@ app_barong:
 		bundle exec rake db:create db:migrate; \
 		DB=bitzlato bundle exec rake db:create db:migrate; \
 		./bin/rake db:seed; \
-		bundle exec rails runner "%w[superadmin admin accountant member].each { |role| Permission.create!(action: 'ACCEPT', role: role, verb: 'ALL', path: 'liza') unless Permission.exists?(role: role, path: 'liza') }"
+		bundle exec rails runner "%w[superadmin admin accountant member].each { |role| Permission.create!(action: 'ACCEPT', role: role, verb: 'ALL', path: 'liza') unless Permission.exists?(role: role, path: 'liza') }"; \
+		bundle exec rails runner "%w[superadmin admin accountant member].each { |role| Permission.create!(action: 'ACCEPT', role: role, verb: 'ALL', path: 'valera') unless Permission.exists?(role: role, path: 'valera') }"
 
 app_peatio:
-	cd peatio; rbenv install -s; bundle; ./bin/init_config; \
+	cd peatio; rbenv install -s; bundle; \
 			rm -f log/* log/daemons/*; \
 			bin/rake tmp:clear tmp:create; \
-			bin/rake db:create db:migrate; \
-			bin/rake db:seed
+			bin/rake db:setup
 
 app_liza:
 	cd liza; git submodule init; git submodule update; \
 		rbenv install -s; bundle; \
 		bundle exec rails db:setup; \
 		yarn install
+
+app_valera:
+	cd valera; rbenv isntall -s; bundle; yarn install; \
+		bundle exec rails db:setup
 
 secrets:
 	bundle exec peatio security keygen --path=secrets
