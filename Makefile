@@ -99,11 +99,10 @@ app_barong:
 		bundle exec rails runner "%w[superadmin admin accountant member].each { |role| Permission.create!(action: 'ACCEPT', role: role, verb: 'ALL', path: 'liza') unless Permission.exists?(role: role, path: 'liza') }"
 
 app_peatio:
-	cd peatio; rbenv install -s; bundle; ./bin/init_config; \
+	cd peatio; rbenv install -s; bundle; \
 			rm -f log/* log/daemons/*; \
 			bin/rake tmp:clear tmp:create; \
-			bin/rake db:create db:migrate; \
-			bin/rake db:seed
+			bin/rake db:setup
 
 app_liza:
 	cd liza; git submodule init; git submodule update; \
