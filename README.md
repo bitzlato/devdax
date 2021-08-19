@@ -157,6 +157,5 @@ Account.find_each { |a| a.update_columns balance: 10000, locked: 1000 }
 1. On linux add `host.docker.internal` to hosts in docker-compose.yml. Or wait until developers will include it to docker setup. https://stackoverflow.com/questions/48546124/what-is-linux-equivalent-of-host-docker-internal
 1. add market making (valera)
 1. add liza
-1. add tower
 1. add availability to make withdraw/deposits
 1. add testnet node

@@ -81,6 +81,13 @@ services:
       VAULT_DEV_ROOT_TOKEN_ID: changeme
       VAULT_ADDR: http://vault:8200
 
+  tower:
+    image: quay.io/openware/tower:2.6.36
+    volumes:
+      - ./config/tower.js:/home/app/env.js
+    ports:
+      - "8091:8080"
+
 volumes:
   influx_data:
   db_data:
