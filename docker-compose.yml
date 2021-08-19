@@ -52,6 +52,7 @@ services:
       BASEAPP_PORT: 3002
       RANGO_PORT: 8090
       LIZA_PORT: 3003
+      VALERA_PORT: 3004
 
     # Good idea. But it does not work on macos because of https://docs.docker.com/docker-for-mac/networking/#there-is-no-docker0-bridge-on-macos
     # The better way it to set peatio.local and ws.local in /etc/hosts manualy
