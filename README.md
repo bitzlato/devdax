@@ -154,9 +154,25 @@ Top up all balances for all accounts
 Account.find_each { |a| a.update_columns balance: 10000, locked: 1000 }
 ```
 
+### .envrc-exmaple и .envrc
+
+> У меня есть еще вопрос про Makefile, там в .evrc: cp -n .envrc-example .envrc
+> для чего нужена опция -n (do not overwrite an existing file), если мы например делаем изменения в .envrc-example
+> ну просто у меня не вносились изменения, пока не удалил .envrc и не запустила заново)
+
+1) Задача devdax дать новому разрабу быструю возможность развернуть всю систему. Для этоо нужно чтобы у него появился .envrc файл откуда растекаются все настройки. Мы эту задачу отлинчо решили, потому что оригинальный вариант с opendax разворавивался 1-2 недели;
+2) make Не перезаписвает .env потому что в дальнейшем разрабочик каждый под себя уже делает определенные настройки, в зависимости от того какую фичу он решает. И молча перезаписывть его было бы не правильно. При этом если ты как разработчик вливаешь (git pull) последние изменения из devdax, то лоично посмотрить что собственно ты вливаешь и как это на тебя повлияет и соответвенно увидить что в .envrc-example появилось что-то новое и принять решение нужно ли тебе менять твой .envrc
+
+
 ## TODO
 
 1. On linux add `host.docker.internal` to hosts in docker-compose.yml. Or wait until developers will include it to docker setup. https://stackoverflow.com/questions/48546124/what-is-linux-equivalent-of-host-docker-internal
 1. add availability to make withdraw/deposits
 1. add testnet node
 1. Add peatio creadentials for valera accounts
+
+
+
+
+
+### How to endable trading?
