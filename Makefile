@@ -18,7 +18,6 @@ nvm:
 	. ${NVM_DIR}/nvm.sh && nvm install
 
 .envrc:
-	cp -n .envrc-example .envrc
 	direnv allow
 
 configure_apps: app_baseapp app_barong app_peatio app_liza app_valera
