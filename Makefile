@@ -114,7 +114,7 @@ app_liza:
 		yarn install
 
 app_valera:
-	cd valera; rbenv isntall -s; bundle; yarn install; \
+	cd valera; rbenv install -s; bundle; yarn install; \
 		bundle exec rails db:setup
 
 secrets:
