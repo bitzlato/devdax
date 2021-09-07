@@ -105,9 +105,9 @@ open http://localhost:8080/signin/auth0.html
 
 ## Ports
 
-* 8080 - gateway (nginx). It is routing requests to other services
+- 8080 - gateway (nginx). It is routing requests to other services
   according to routing table in ambassador-config/mapping-peatio.yaml
-* Other ports you can find in ambassador-config/mapping-peatio.yaml
+- Other ports you can find in ambassador-config/mapping-peatio.yaml
 
 ## Common tasks
 
@@ -126,6 +126,7 @@ Look into your $PATH
 ## FAQ
 
 ### Why it is running on localhost:8080 not www.app.local?
+
 app.local is on http by default, but auth0 accepts localhost or https
 
 ### How to endable trading?
@@ -134,6 +135,7 @@ app.local is on http by default, but auth0 accepts localhost or https
 cd barong
 bundle exec rails c
 ```
+
 ```ruby
 User.find_each { |u| u.update_columns level: 3 }
 ```
@@ -144,6 +146,7 @@ User.find_each { |u| u.update_columns level: 3 }
 cd peatio
 bundle exec rails c
 ```
+
 ```ruby
 Member.find_each { |m| m.get_account('usd').update_columns balance: 10000, locked: 1000 }
 ```
@@ -152,6 +155,14 @@ Top up all balances for all accounts
 
 ```ruby
 Account.find_each { |a| a.update_columns balance: 10000, locked: 1000 }
+```
+
+### How to enable 2FA?
+
+Add to the `.envrc.local`:
+
+```bash
+export VAULT_ENABLED=true
 ```
 
 ### .envrc hierarcy
@@ -164,9 +175,3 @@ Base environment variables are provided by .envrc file from git repository, loca
 1. add availability to make withdraw/deposits
 1. add testnet node
 1. Add peatio creadentials for valera accounts
-
-
-
-
-
-### How to endable trading?
