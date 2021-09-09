@@ -125,6 +125,29 @@ Look into your $PATH
 
 ## FAQ
 
+### Troubleshoot
+If you have a problem like:
+```
+./bin/init_vault
+VAULT_TOKEN=
+Error disabling secrets engine at secret/: Error making API request.
+
+URL: DELETE http://vault:8200/v1/sys/mounts/secret
+Code: 400. Errors:
+
+* missing client token
+make: *** [Makefile:56: init_vault] Ошибка 2
+```
+or another like this. Check your setup direnv.
+if this command:
+```
+env | grep VAULT
+```
+doesn't show you anything.
+Please setup your direnv:
+https://clck.ru/XR3pC
+
+
 ### Why it is running on localhost:8080 not www.app.local?
 app.local is on http by default, but auth0 accepts localhost or https
 
