@@ -33,37 +33,39 @@ make linux
 
 ## Run developing apps
 
-1st terminal session (peatio)
+**1st terminal session (peatio)**
 
 ```bash
 make start_peatio
 ```
 
-2nd terminal session (barong)
+**2nd terminal session (barong)**
 
 ```bash
 make start_barong
 ```
 
-3rd terminal session (baseapp)
+**3rd terminal session (baseapp)**
 
 ```bash
 make start_baseapp
 ```
 
-4th terminal session (rango)
+**4th terminal session (rango)**
 
 ```bash
 make start_rango
 ```
 
-5th terminal session (liza)
+**5th terminal session (liza)**
 
 ```bash
 make start_liza
 ```
 
-6th terminal session (valera)
+Open page http://localhost:3003/ in browser.
+
+**6th terminal session (valera)**
 
 ```bash
 make start_valera
@@ -71,19 +73,19 @@ make start_valera
 
 ## Run main apps in light mode (only web, no daemons)
 
-1st terminal session (peatio)
+**1st terminal session (peatio)**
 
 ```bash
 make start_peatio_web
 ```
 
-2nd terminal session (barong)
+**2nd terminal session (barong)**
 
 ```bash
 make start_barong_web
 ```
 
-3rd terminal session (baseapp)
+**3rd terminal session (baseapp)**
 
 ```bash
 make start_baseapp
