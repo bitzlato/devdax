@@ -20,4 +20,23 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - run: make
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+        bundler-cache: true
+    - name: Install direnv
+      run: sudo apt-get install -y direnv
+    - name: Install rbenv
+      run: git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+    - name: Install rbenv build
+      run: |
+        export PATH="$HOME/.rbenv/bin:$PATH"
+        eval "$(rbenv init -)"
+        mkdir -p "$(rbenv root)"/plugins
+        git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+    - name: Make
+      run: | 
+        export PATH="$HOME/.rbenv/bin:$PATH"
+        eval "$(rbenv init -)"
+        make
