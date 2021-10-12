@@ -21,7 +21,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Fix submodules sources
-      run: perl -i -p -e 's/git\@github.com\:/https:\/\/github.com\//' .gitmodules
+      run: |
+        perl -i -p -e 's/git\@github.com\:/https:\/\/github.com\//' .gitmodules
+        perl -i -p -e 's/git\@github.com\:/https:\/\/github.com\//' */.gitmodules
     - name: Checkout submodules
       uses: textbook/git-checkout-submodule-action@master
     - name: Set up Ruby
