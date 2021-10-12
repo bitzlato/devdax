@@ -47,7 +47,6 @@ deps: GeoLite2-Country.mmdb
 deps_linux: GeoLite2-Country.mmdb_linux
 	direnv version
 	rbenv version
-	rbenv install -s
 
 submodules:
 	git submodule update --init --recursive
