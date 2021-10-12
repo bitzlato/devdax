@@ -16,6 +16,7 @@ You should have installed and configured dev environment https://github.com/bitz
 1. nvm, yarn
 1. goenv
 1. wget
+1. You must have github authorization by public key
 
 ## Installation
 
