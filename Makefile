@@ -16,6 +16,7 @@ endif
 all: deps setup services configure_apps
 
 setup: .envrc submodules rbenv nvm
+	@echo setup
 
 rbenv:
 	rbenv install
@@ -29,10 +30,11 @@ nvm:
 configure_apps: app_baseapp app_barong app_peatio app_liza app_valera
 
 GeoLite2-Country.mmdb:
-	wget -O - https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw | tar -xz --strip-components 1 "GeoLite2-Country_*/GeoLite2-Country.mmdb"
-
-GeoLite2-Country.mmdb_linux:
-	wget -O - https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw | tar -xz --strip-components 1 --wildcards "GeoLite2-Country_*/GeoLite2-Country.mmdb"
+ifeq ($(UNAME), Drawin)
+		wget -O - https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw | tar -xz --strip-components 1 "GeoLite2-Country_*/GeoLite2-Country.mmdb"
+else
+		wget -O - https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw | tar -xz --strip-components 1 --wildcards "GeoLite2-Country_*/GeoLite2-Country.mmdb"
+endif
 
 services: secrets stop_and_remove_services start_services init_vault
 
@@ -44,15 +46,15 @@ start_services:
 	until $$(curl --output /dev/null --silent --head --fail localhost:8086/ping); do sleep 1; done
 	docker-compose exec influxdb bash -c "cat /influxdb.sql | influx"
 
-deps:
+deps: GeoLite2-Country.mmdb
 	direnv version
 	rbenv version
 
-deps_macos: deps GeoLite2-Country.mmdb
+deps_macos:
 	pg_config --version 2&> /dev/null || brew install -q libpq
 	brew install -q shared-mime-info
 
-deps_linux: deps GeoLite2-Country.mmdb_linux
+deps_linux: 
 	@echo deps_linux
 
 submodules:
