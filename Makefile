@@ -7,19 +7,13 @@ UNAME := $(shell uname)
 # TODO check *env
 # TODO check hosts
 
-ifeq ($(UNAME), Drawin)
-deps: deps_macos
-else
-deps: deps_linux
-endif
-
 all: deps setup services configure_apps
 
 setup: .envrc submodules rbenv nvm
 	@echo setup
 
 rbenv:
-	rbenv install
+	rbenv install -s
 
 nvm:
 	. ${NVM_DIR}/nvm.sh && nvm install
@@ -49,13 +43,10 @@ start_services:
 deps: GeoLite2-Country.mmdb
 	direnv version
 	rbenv version
-
-deps_macos:
+ifeq ($(UNAME), Drawin)
 	pg_config --version 2&> /dev/null || brew install -q libpq
 	brew install -q shared-mime-info
-
-deps_linux: 
-	@echo deps_linux
+endif
 
 submodules:
 	git submodule update --init --recursive
@@ -102,7 +93,7 @@ app_baseapp:
 	rm -f baseapp/web/public/config/env.js; ln -s env.localdev.js baseapp/web/public/config/env.js
 
 app_barong:
-	cd barong; rbenv install; bundle; ./bin/init_config; \
+	cd barong; rbenv install -s; bundle; ./bin/init_config; \
 		bundle exec rake db:create db:migrate; \
 		DB=bitzlato bundle exec rake db:create db:migrate; \
 		./bin/rake db:seed; \
@@ -110,19 +101,19 @@ app_barong:
 		bundle exec rails runner "%w[superadmin admin accountant member].each { |role| Permission.create!(action: 'ACCEPT', role: role, verb: 'ALL', path: 'valera') unless Permission.exists?(role: role, path: 'valera') }"
 
 app_peatio:
-	cd peatio; rbenv install; bundle; \
+	cd peatio; rbenv install -s; bundle; \
 			rm -f log/* log/daemons/*; \
 			bin/rake tmp:clear tmp:create; \
 			bin/rake db:setup
 
 app_liza:
 	cd liza; git submodule init; git submodule update; \
-		rbenv install; bundle; \
+		rbenv install -s; bundle; \
 		bundle exec rails db:setup; \
 		yarn install
 
 app_valera:
-	cd valera; rbenv install; bundle; yarn install; \
+	cd valera; rbenv install -s; bundle; yarn install; \
 		bundle exec rails db:setup
 
 secrets:
