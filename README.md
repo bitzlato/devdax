@@ -19,16 +19,10 @@ You should have installed and configured dev environment https://github.com/bitz
 
 ## Installation
 
-Configure and start dependency services on MacOS:
+Configure and start dependency services:
 
 ```bash
 make
-```
-
-on Linux:
-
-```bash
-make linux
 ```
 
 ## Run developing apps
