@@ -38,11 +38,11 @@ stop_and_remove_services:
 start_services:
 	docker-compose up -Vd
 	until $$(curl --output /dev/null --silent --head --fail localhost:8086/ping); do sleep 1; done
-	docker-compose exec influxdb bash -c "cat /influxdb.sql | influx"
+	docker-compose exec -T influxdb bash -c "cat /influxdb.sql | influx"
 
 deps: GeoLite2-Country.mmdb
 	direnv version
-	rbenv version
+	rbenv -v
 ifeq ($(UNAME), Drawin)
 	pg_config --version 2&> /dev/null || brew install -q libpq
 	brew install -q shared-mime-info

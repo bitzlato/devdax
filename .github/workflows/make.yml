@@ -23,16 +23,20 @@ jobs:
     - name: Fix submodules sources
       run: |
         perl -i -p -e 's/git\@github.com\:/https:\/\/github.com\//' .gitmodules
-        perl -i -p -e 's/git\@github.com\:/https:\/\/github.com\//' */.gitmodules
     - name: Checkout submodules
-      uses: textbook/git-checkout-submodule-action@master
+      run: |
+        git submodule init
+        git submodule update
+    - name: Fix deep submodules sources
+      run: |
+        perl -i -p -e 's/git\@github.com\:/https:\/\/github.com\//' */.gitmodules
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7
         bundler-cache: true
-    - name: Install direnv
-      run: sudo apt-get install -y direnv
+    - name: Use direnv
+      uses: HatsuneMiku3939/direnv-action@v1
     - name: Install rbenv
       run: git clone https://github.com/rbenv/rbenv.git ~/.rbenv
     - name: Install rbenv build
