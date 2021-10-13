@@ -24,8 +24,6 @@ jobs:
       run: |
         perl -i -p -e 's/git\@github.com\:/https:\/\/github.com\//' .gitmodules
         perl -i -p -e 's/git\@github.com\:/https:\/\/github.com\//' */.gitmodules
-    - name: Checkout submodules
-      uses: textbook/git-checkout-submodule-action@master
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
