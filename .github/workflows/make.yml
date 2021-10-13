@@ -23,9 +23,11 @@ jobs:
     - name: Fix submodules sources
       run: |
         perl -i -p -e 's/git\@github.com\:/https:\/\/github.com\//' .gitmodules
+    - name: Checkout submodules
+      uses: textbook/git-checkout-submodule-action@master
+    - name: Fix deep submodules sources
+      run: |
         perl -i -p -e 's/git\@github.com\:/https:\/\/github.com\//' */.gitmodules
-        cat .gitmodules
-        cat */.gitmodules
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
