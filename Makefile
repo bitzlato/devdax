@@ -42,7 +42,7 @@ start_services:
 
 deps: GeoLite2-Country.mmdb
 	direnv version
-	rbenv version
+	rbenv -v
 ifeq ($(UNAME), Drawin)
 	pg_config --version 2&> /dev/null || brew install -q libpq
 	brew install -q shared-mime-info
