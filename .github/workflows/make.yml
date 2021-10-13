@@ -35,8 +35,8 @@ jobs:
       with:
         ruby-version: 2.7
         bundler-cache: true
-    - name: Install direnv
-      run: sudo apt-get install -y direnv
+    - name: Use direnv
+      uses: HatsuneMiku3939/direnv-action@v1
     - name: Install rbenv
       run: git clone https://github.com/rbenv/rbenv.git ~/.rbenv
     - name: Install rbenv build
