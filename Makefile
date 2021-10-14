@@ -24,7 +24,7 @@ nvm:
 configure_apps: app_baseapp app_barong app_peatio app_liza app_valera
 
 GeoLite2-Country.mmdb:
-ifeq ($(UNAME), Drawin)
+ifeq ($(UNAME), Darwin)
 		wget -O - https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw | tar -xz --strip-components 1 "GeoLite2-Country_*/GeoLite2-Country.mmdb"
 else
 		wget -O - https://download.maxmind.com/app/geoip_download\?edition_id\=GeoLite2-Country\&suffix\=tar.gz\&license_key\=T6ElPBlyOOuCyjzw | tar -xz --strip-components 1 --wildcards "GeoLite2-Country_*/GeoLite2-Country.mmdb"
