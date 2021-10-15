@@ -90,7 +90,7 @@ start_valera:
 
 app_baseapp:
 	cd baseapp/web; yarn install
-	rm -f baseapp/web/public/config/env.js; ln -s env.devdax.js baseapp/web/public/config/env.js
+	rm -f baseapp/web/public/config/env.js; ln -s env.localdev.js baseapp/web/public/config/env.js
 
 app_barong:
 	cd barong; rbenv install -s; bundle; ./bin/init_config; \

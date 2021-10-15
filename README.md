@@ -58,7 +58,7 @@ make start_rango
 make start_liza
 ```
 
-Open page http://localhost:3002/ in browser.
+Open page http://localhost:8080/ in browser.
 
 **6th terminal session (valera)**
 
