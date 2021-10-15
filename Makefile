@@ -104,7 +104,7 @@ app_peatio:
 	cd peatio; rbenv install -s; bundle; \
 			rm -f log/* log/daemons/*; \
 			bin/rake tmp:clear tmp:create; \
-			bin/rake db:setup
+			bin/rake db:reset
 
 app_liza:
 	cd liza; git submodule init; git submodule update; \
