@@ -90,7 +90,7 @@ start_valera:
 
 app_baseapp:
 	cd baseapp/web; yarn install
-	rm -f baseapp/web/public/config/env.js; ln -s env.localdev.js baseapp/web/public/config/env.js
+	rm -f baseapp/web/public/config/env.js; ln -s env.devdax.js baseapp/web/public/config/env.js
 
 app_barong:
 	cd barong; rbenv install -s; bundle; ./bin/init_config; \
@@ -104,7 +104,7 @@ app_peatio:
 	cd peatio; rbenv install -s; bundle; \
 			rm -f log/* log/daemons/*; \
 			bin/rake tmp:clear tmp:create; \
-			bin/rake db:create db:migrate
+			bin/rake db:reset
 
 app_liza:
 	cd liza; git submodule init; git submodule update; \
