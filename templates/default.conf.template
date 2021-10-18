@@ -63,6 +63,14 @@ server {
       proxy_set_header        X-Original-URI $request_uri;
     }
 
+    location /api/v2/peatio/swagger {
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_pass http://${DOCKER_HOST_IP}:${PEATIO_PORT}/api/v2/swagger;
+    }
+
     location /api/v2/peatio {
       proxy_set_header Host $http_host;
       proxy_set_header X-Real-IP $remote_addr;
