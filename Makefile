@@ -1,6 +1,6 @@
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
-PROXY_HOST := "ex-stage.bitzlato.bz"
+PROXY_HOST := "market-s1.bitzlato.com"
 UNAME := $(shell uname)
 
 # TODO check VAULT_TOKEN, JWT_SECERTS and DATABASE_PASSWORD
