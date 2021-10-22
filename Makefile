@@ -65,28 +65,28 @@ start_baseapp_proxy:
 
 start_peatio:
 	echo -n -e "\033]0;peatio\007"
-	cd peatio; bundle exec foreman start
+	cd peatio; overmind start
 
 start_barong:
 	echo -n -e "\033]0;barong\007"
-	cd barong; bundle exec foreman start
+	cd barong; overmind start
 
 start_peatio_web:
 	echo -n -e "\033]0;peatio_web\007"
-	cd peatio; bundle exec foreman start web
+	cd peatio; overmind start web
 
 start_barong_web:
 	echo -n -e "\033]0;barong_web\007"
-	cd barong; bundle exec foreman start web
+	cd barong; overmind start web
 
 start_rango:
 	cd rango; go run ./cmd/rango
 
 start_liza:
-	cd liza; bundle exec foreman start
+	cd liza; overmind start
 
 start_valera:
-	cd valera; bundle exec foreman start
+	cd valera; overmind start
 
 app_baseapp:
 	cd baseapp/web; yarn install

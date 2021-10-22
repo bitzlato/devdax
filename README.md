@@ -17,6 +17,7 @@ You should have installed and configured dev environment https://github.com/bitz
 1. goenv
 1. wget
 1. You must have github authorization by public key
+1. install [Overmind]((https://github.com/DarthSim/overmind)
 
 ## Installation
 
