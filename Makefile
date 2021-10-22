@@ -40,6 +40,15 @@ start_services:
 	until $$(curl --output /dev/null --silent --head --fail localhost:8086/ping); do sleep 1; done
 	docker-compose exec -T influxdb bash -c "cat /influxdb.sql | influx"
 
+start_geth:
+	docker-compose -f docker-compose-geth.yml up -Vd
+
+stop_geth:
+	docker-compose -f docker-compose-geth.yml rm -fsv
+
+geth_console:
+	geth attach http://localhost:8545
+
 deps: GeoLite2-Country.mmdb
 	direnv version
 	rbenv -v
