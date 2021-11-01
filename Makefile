@@ -73,11 +73,11 @@ start_barong:
 
 start_peatio_web:
 	echo -n -e "\033]0;peatio_web\007"
-	cd peatio; overmind start web
+	cd peatio; overmind start -l web
 
 start_barong_web:
 	echo -n -e "\033]0;barong_web\007"
-	cd barong; overmind start web
+	cd barong; overmind start -l web
 
 start_rango:
 	cd rango; go run ./cmd/rango
