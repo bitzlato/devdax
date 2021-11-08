@@ -114,6 +114,21 @@ open http://localhost:8080/signin/auth0.html
 make services
 ```
 
+### Geth docker container
+
+*see docker-compose-geth.yml*
+
+```
+make start_geth
+make stop_geth
+```
+
+#### Geth console
+
+```
+make geth_console
+```
+
 ## Known issues:
 
 Install gem pg for mac and linux - https://wikimatze.de/installing-postgresql-gem-under-ubuntu-and-mac/

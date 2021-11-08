@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  geth:
+    image: ethereum/client-go:v1.10.11
+    volumes:
+      - geth_data:/root
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+      - "30303:30303"
+    command: --rinkeby --http --http.addr "0.0.0.0" --http.corsdomain "*" --ws.addr "0.0.0.0" --ws.origins "*" --maxpeers 200 --cache 1024 --syncmode=fast --http.api eth,net,web3,personal
+
+volumes:
+  geth_data:
