@@ -60,12 +60,6 @@ make start_liza
 
 Open page http://localhost:8080/ in browser.
 
-**6th terminal session (valera)**
-
-```bash
-make start_valera
-```
-
 ## Run main apps in light mode (only web, no daemons)
 
 **1st terminal session (peatio)**
@@ -215,4 +209,3 @@ Base environment variables are provided by .envrc file from git repository, loca
 1. On linux add `host.docker.internal` to hosts in docker-compose.yml. Or wait until developers will include it to docker setup. https://stackoverflow.com/questions/48546124/what-is-linux-equivalent-of-host-docker-internal
 1. add availability to make withdraw/deposits
 1. add testnet node
-1. Add peatio creadentials for valera accounts
