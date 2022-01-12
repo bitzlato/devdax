@@ -183,13 +183,11 @@ bundle exec rails c
 ```
 
 ```ruby
-Member.find_each { |m| m.get_account('usd').update_columns balance: 10000, locked: 1000 }
-```
+Member.find_each do |member|
+  member.get_account('usd').update_columns balance: 10000, locked: 1000
+  member.get_account('btc').update_columns balance: 1, locked: 1
+end
 
-Top up all balances for all accounts
-
-```ruby
-Account.find_each { |a| a.update_columns balance: 10000, locked: 1000 }
 ```
 
 ### How to enable 2FA?
