@@ -101,7 +101,7 @@ app_baseapp:
 app_barong:
 	cd barong; rbenv install -s; bundle; ./bin/init_config; \
 		bundle exec rake db:create db:migrate; \
-		DB=bitzlato bundle exec rake db:create db:migrate; \
+		DB=bitzlato bundle exec rake db:create; psql bitzlato_development < db/bitzlato/structure.sql; \
 		./bin/rake db:seed; \
 		bundle exec rails runner "%w[superadmin admin accountant member].each { |role| Permission.create!(action: 'ACCEPT', role: role, verb: 'ALL', path: 'liza') unless Permission.exists?(role: role, path: 'liza') }"
 
