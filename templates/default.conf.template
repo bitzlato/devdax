@@ -35,7 +35,16 @@ server {
       proxy_pass http://${DOCKER_HOST_IP}:8091;
     }
 
-    location /kyc {
+    location /webhook/sumsub {
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      error_page 401 =401 /error/401;
+      proxy_pass http://${DOCKER_HOST_IP}:${KYC_PORT}/api/webhook/sumsub;
+    }
+
+    location /api/v1/kyc {
       proxy_set_header Host $http_host;
       proxy_set_header X-Real-IP $remote_addr;
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -46,7 +55,7 @@ server {
       proxy_set_header Authorization $auth_header;
       error_page 401 =401 /error/401;
       proxy_set_header        X-Original-URI $request_uri;
-      proxy_pass http://${DOCKER_HOST_IP}:${KYC_PORT}/;
+      proxy_pass http://${DOCKER_HOST_IP}:${KYC_PORT}/api/kyc;
       proxy_cookie_path / "/; Secure";
     }
 
