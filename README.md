@@ -58,7 +58,7 @@ make start_rango
 make start_liza
 ```
 
-**6th terminal session (kys-service)**
+**6th terminal session (kyc-service)**
 
 ```bash
 make start_kyc_service
