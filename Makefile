@@ -21,7 +21,7 @@ nvm:
 .envrc:
 	direnv allow
 
-configure_apps: app_baseapp app_barong app_peatio app_liza
+configure_apps: app_baseapp app_barong app_peatio app_liza app_kyc_service
 
 GeoLite2-Country.mmdb:
 ifeq ($(UNAME), Darwin)
@@ -94,6 +94,9 @@ start_rango:
 start_liza:
 	cd liza; bundle exec foreman start
 
+start_kyc_service:
+	cd kyc-service; bundle exec foreman start
+
 app_baseapp:
 	cd baseapp/web; yarn install
 	rm -f baseapp/web/public/config/env.js; ln -s env.localdev.js baseapp/web/public/config/env.js
@@ -110,6 +113,10 @@ app_peatio:
 			rm -f log/* log/daemons/*; \
 			bin/rake tmp:clear tmp:create; \
 			bin/rake db:reset
+
+app_kyc_service:
+	cd kyc-service; rbenv install -s; bundle; \
+	bundle exec rails db:setup; \
 
 app_liza:
 	cd liza; git submodule init; git submodule update; \
