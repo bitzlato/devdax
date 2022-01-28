@@ -13,3 +13,6 @@
 [submodule "liza"]
 	path = liza
 	url = git@github.com:bitzlato/liza.git
+[submodule "kyc-service"]
+	path = kyc-service
+	url = git@github.com:bitzlato/kyc-service
