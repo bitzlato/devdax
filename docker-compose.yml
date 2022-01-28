@@ -77,7 +77,7 @@ services:
     environment:
       SKIP_SETCAP: 1
       VAULT_TOKEN: ${VAULT_TOKEN}
-      VAULT_DEV_ROOT_TOKEN_ID: changeme
+      VAULT_DEV_ROOT_TOKEN_ID: ${VAULT_TOKEN}
       VAULT_ADDR: http://vault:8200
 
   tower:
