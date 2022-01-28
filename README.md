@@ -58,6 +58,13 @@ make start_rango
 make start_liza
 ```
 
+**6th terminal session (kys-service)**
+
+```bash
+make start_kyc_service
+```
+
+
 Open page http://localhost:8080/ in browser.
 
 ## Run main apps in light mode (only web, no daemons)
