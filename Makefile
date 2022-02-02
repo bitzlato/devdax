@@ -126,3 +126,11 @@ app_liza:
 
 secrets:
 	bundle exec peatio security keygen --path=secrets
+
+checkout_all_master:
+	cd kyc-service; git checkout main; git pull; cd ..; \
+		cd barong; git checkout master;  git pull; cd ..; \
+		cd liza; git checkout master;  git pull; cd ..; \
+		cd peatio; git checkout master;  git pull; cd ..; \
+		cd rango; git checkout master;  git pull; cd ..; \
+		cd baseapp; git checkout master; git pull;  cd ..;
