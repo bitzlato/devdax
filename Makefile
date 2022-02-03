@@ -128,9 +128,9 @@ secrets:
 	bundle exec peatio security keygen --path=secrets
 
 checkout_all_master:
-	cd kyc-service; git checkout main; git pull; cd ..; \
-		cd barong; git checkout master;  git pull; cd ..; \
-		cd liza; git checkout master;  git pull; cd ..; \
-		cd peatio; git checkout master;  git pull; cd ..; \
+	cd kyc-service; git checkout main; git pull; bundle install; bundle exec rake db:setup; cd ..; \
+		cd barong; git checkout master;  git pull; bundle install; bundle exec rake db:setup;  cd ..; \
+		cd liza; git checkout master;  git pull; bundle install; bundle exec rake db:setup; cd ..; \
+		cd peatio; git checkout master;  git pull; bundle install; bundle exec rake db:setup;  cd ..; \
 		cd rango; git checkout master;  git pull; cd ..; \
-		cd baseapp; git checkout master; git pull;  cd ..;
+		cd baseapp; git checkout master; git pull; yarn install; cd ..;
