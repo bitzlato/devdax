@@ -1,6 +1,6 @@
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
-PROXY_HOST := "market-s1.bitzlato.com"
+PROXY_HOST := "s1.s-www.lgk.one"
 UNAME := $(shell uname)
 
 # TODO check VAULT_TOKEN, JWT_SECERTS and DATABASE_PASSWORD
@@ -65,11 +65,11 @@ init_vault:
 
 start_baseapp:
 	echo -n -e "\033]0;baseapp\007"
-	cd baseapp/web; PORT=3002 yarn start
+	cd baseapp; PORT=3002 yarn start:all
 
 start_baseapp_proxy:
 	echo -n -e "\033]0;baseapp_proxy\007"
-	cd baseapp/web; \
+	cd baseapp; \
 	PORT=8080 PROXY_HOST=$(PROXY_HOST) yarn start
 
 start_peatio:
@@ -95,7 +95,7 @@ start_liza:
 	cd liza; bundle exec foreman start
 
 app_baseapp:
-	cd baseapp/web; yarn install
+	cd baseapp; yarn rebuild
 	rm -f baseapp/web/public/config/env.js; ln -s env.localdev.js baseapp/web/public/config/env.js
 
 app_barong:
