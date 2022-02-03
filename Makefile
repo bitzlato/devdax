@@ -131,6 +131,6 @@ checkout_all_master:
 	cd kyc-service; git checkout main; git pull; bundle install; bundle exec rake db:setup; cd ..; \
 		cd barong; git checkout master;  git pull; bundle install; bundle exec rake db:setup;  cd ..; \
 		cd liza; git checkout master;  git pull; bundle install; bundle exec rake db:setup; cd ..; \
-		cd peatio; git checkout master;  git pull; bundle install; bundle exec rake db:setup;  cd ..; \
+		cd peatio; git checkout master;  git pull; bundle install; bundle exec rake db:migrate;  cd ..; \
 		cd rango; git checkout master;  git pull; cd ..; \
-		cd baseapp; git checkout master; git pull; yarn install; cd ..;
+		cd baseapp; git checkout master; git pull; yarn install; cd web; yarn install; cd ..\..;
