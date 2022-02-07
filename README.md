@@ -117,7 +117,7 @@ make services
 
 ### Geth docker container
 
-*see docker-compose-geth.yml*
+_see docker-compose-geth.yml_
 
 ```
 make start_geth
@@ -143,6 +143,7 @@ Look into your $PATH
 #### Vault
 
 If you have a problem like:
+
 ```
 ./bin/init_vault
 VAULT_TOKEN=
@@ -154,11 +155,14 @@ Code: 400. Errors:
 * missing client token
 make: *** [Makefile:56: init_vault] Ошибка 2
 ```
+
 or another like this. Check your setup direnv.
 if this command:
+
 ```
 env | grep VAULT
 ```
+
 doesn't show you anything.
 Please setup your direnv:
 https://clck.ru/XR3pC
@@ -166,6 +170,31 @@ https://clck.ru/XR3pC
 #### Rails commands don't work in peatio on macOS
 
 See: https://github.com/se3000/ruby-eth/issues/47
+
+#### Failed to build gem pg
+
+```
+checking for pg_config... no
+No pg_config... trying anyway. If building fails, please try again with
+ --with-pg-config=/path/to/pg_config
+checking for libpq-fe.h... no
+Can't find the 'libpq-fe.h header
+*** extconf.rb failed ***
+```
+
+You need to install `libpq`
+
+**MacOs**
+
+```
+brew install libpq
+```
+
+**Linux**
+
+```
+sudo apt-get install libpq-dev
+```
 
 ### Why it is running on localhost:8080 not www.app.local?
 
