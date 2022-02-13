@@ -133,6 +133,23 @@ Look into your $PATH
 
 ### Troubleshoot
 
+#### Unsupported SSL version on Mac
+
+When you run make, you may encounter the following error:
+```
+WARNING: /Users/alex/.rvm/rubies/ruby-2.7.5/bin/ruby is loading libcrypto in an unsafe way
+zsh: abort      bin/rake db:reset
+```
+
+You need to install openssl@1.1 and update the system symlinks.
+_(Tested on Mac Intel)_
+```bash
+brew install openssl@1.1
+rm /usr/local/lib/libcrypto.dylib /usr/local/lib/libssl.dylib
+sudo ln -s $(brew --prefix openssl@1.1)/lib/libcrypto.dylib /usr/local/lib/
+sudo ln -s $(brew --prefix openssl@1.1)/lib/libssl.dylib  /usr/local/lib
+```
+
 #### Vault
 
 If you have a problem like:
@@ -188,6 +205,7 @@ brew install libpq
 ```
 sudo apt-get install libpq-dev
 ```
+
 
 ### Why it is running on localhost:8080 not www.app.local?
 
