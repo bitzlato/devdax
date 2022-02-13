@@ -177,10 +177,6 @@ doesn't show you anything.
 Please setup your direnv:
 https://clck.ru/XR3pC
 
-#### Rails commands don't work in peatio on macOS
-
-See: https://github.com/se3000/ruby-eth/issues/47
-
 #### Failed to build gem pg
 
 ```
