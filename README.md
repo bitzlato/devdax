@@ -8,7 +8,7 @@ MacOS is supported. Linux is not tested.
 
 ## Environments presettings
 
-You should have installed and configured dev environment https://github.com/bitzlato/guides#правильно-настроенное-окружение
+You should have installed and configured environment:
 
 1. docker vs docker-compose
 1. direnv
