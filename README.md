@@ -146,8 +146,8 @@ _(Tested on Mac Intel)_
 ```bash
 brew install openssl@1.1
 rm /usr/local/lib/libcrypto.dylib /usr/local/lib/libssl.dylib
-sudo ln -s $(brew --prefix openssl@1.1)/lib/libcrypto.dylib /usr/local/lib/
-sudo ln -s $(brew --prefix openssl@1.1)/lib/libssl.dylib  /usr/local/lib
+sudo ln -s /usr/local/Cellar/openssl@1.1/1.1.1m/lib/libcrypto.dylib /usr/local/lib/
+sudo ln -s /usr/local/Cellar/openssl@1.1/1.1.1m/lib/libssl.dylib  /usr/local/lib
 ```
 
 #### Vault
@@ -230,7 +230,6 @@ Member.find_each do |member|
   member.get_account('usd').update_columns balance: 10000, locked: 1000
   member.get_account('btc').update_columns balance: 1, locked: 1
 end
-
 ```
 
 ### How to enable 2FA?
