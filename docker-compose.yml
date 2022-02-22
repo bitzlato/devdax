@@ -81,7 +81,7 @@ services:
       VAULT_ADDR: http://vault:8200
 
   tower:
-    image: quay.io/openware/tower:3.0.67
+    image: quay.io/openware/tower:3.0.68
     volumes:
       - ./config/tower.js:/home/app/env.js
     ports:
