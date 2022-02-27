@@ -16,8 +16,7 @@ rbenv:
 	rbenv install -s
 
 nvm:
-	. ${NVM_DIR}/nvm.sh && nvm install
-
+	. ${NVM_DIR}/nvm.sh && nvm install -s
 .envrc:
 	direnv allow
 
