@@ -9,14 +9,18 @@ UNAME := $(shell uname)
 
 all: deps setup services configure_apps
 
-setup: .envrc submodules rbenv nvm
+setup: .envrc submodules rbenv nvm yarn
 	@echo setup
 
 rbenv:
 	rbenv install -s
 
 nvm:
-	. ${NVM_DIR}/nvm.sh && nvm install -s
+	. ${NVM_DIR}/nvm.sh && nvm install
+
+yarn:
+	npm install --global yarn
+
 .envrc:
 	direnv allow
 
@@ -64,7 +68,7 @@ init_vault:
 
 start_baseapp:
 	echo -n -e "\033]0;baseapp\007"
-	cd baseapp; PORT=3002 yarn start:all
+	cd baseapp; nvm install; PORT=3002 yarn start:all
 
 start_baseapp_proxy:
 	echo -n -e "\033]0;baseapp_proxy\007"
