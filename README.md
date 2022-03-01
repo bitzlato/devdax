@@ -141,14 +141,7 @@ WARNING: /Users/alex/.rvm/rubies/ruby-2.7.5/bin/ruby is loading libcrypto in an 
 zsh: abort      bin/rake db:reset
 ```
 
-You need to install openssl@1.1 and update the system symlinks.
-_(Tested on Mac Intel)_
-```bash
-brew install openssl@1.1
-rm /usr/local/lib/libcrypto.dylib /usr/local/lib/libssl.dylib
-sudo ln -s /usr/local/Cellar/openssl@1.1/1.1.1m/lib/libcrypto.dylib /usr/local/lib/
-sudo ln -s /usr/local/Cellar/openssl@1.1/1.1.1m/lib/libssl.dylib  /usr/local/lib
-```
+You need to install openssl@1.1 and solve with it [this link](https://stackoverflow.com/questions/38670295/homebrew-refusing-to-link-openssl)
 
 #### Vault
 
