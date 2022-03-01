@@ -9,7 +9,7 @@ UNAME := $(shell uname)
 
 all: deps setup services configure_apps
 
-setup: .envrc submodules rbenv nvm yarn
+setup: .envrc submodules rbenv nvm
 	@echo setup
 
 rbenv:
@@ -17,9 +17,6 @@ rbenv:
 
 nvm:
 	. ${NVM_DIR}/nvm.sh && nvm install
-
-yarn:
-	npm install --global yarn
 
 .envrc:
 	direnv allow
