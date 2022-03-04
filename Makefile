@@ -21,7 +21,7 @@ nvm:
 .envrc:
 	direnv allow
 
-configure_apps: app_baseapp app_barong app_peatio app_liza
+configure_apps: app_baseapp app_barong app_peatio app_liza app_kyc_service
 
 GeoLite2-Country.mmdb:
 ifeq ($(UNAME), Darwin)
@@ -94,6 +94,9 @@ start_rango:
 start_liza:
 	cd liza; bundle exec foreman start
 
+start_kyc_service:
+	cd kyc-service; bundle exec foreman start
+
 app_baseapp:
 	cd baseapp; yarn rebuild
 	rm -f baseapp/web/public/config/env.js; ln -s env.localdev.js baseapp/web/public/config/env.js
@@ -111,6 +114,10 @@ app_peatio:
 			bin/rake tmp:clear tmp:create; \
 			bin/rake db:reset
 
+app_kyc_service:
+	cd kyc-service; rbenv install -s; bundle; \
+	bundle exec rails db:setup; \
+
 app_liza:
 	cd liza; git submodule init; git submodule update; \
 		rbenv install -s; bundle; \
@@ -119,3 +126,11 @@ app_liza:
 
 secrets:
 	bundle exec peatio security keygen --path=secrets
+
+checkout_all_master:
+	cd kyc-service; git checkout main; git pull; bundle install; bundle exec rake db:setup; cd ..; \
+		cd barong; git checkout master;  git pull; bundle install; bundle exec rake db:setup;  cd ..; \
+		cd liza; git checkout master;  git pull; bundle install; bundle exec rake db:setup; cd ..; \
+		cd peatio; git checkout master;  git pull; bundle install; bundle exec rake db:migrate;  cd ..; \
+		cd rango; git checkout master;  git pull; cd ..; \
+		cd baseapp; git checkout master; git pull; yarn install; cd web; yarn install; cd ..\..;

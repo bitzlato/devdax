@@ -51,6 +51,7 @@ services:
       BASEAPP_PORT: 3002
       RANGO_PORT: 8090
       LIZA_PORT: 3003
+      KYC_PORT: 3008
 
     # Good idea. But it does not work on macos because of https://docs.docker.com/docker-for-mac/networking/#there-is-no-docker0-bridge-on-macos
     # The better way it to set peatio.local and ws.local in /etc/hosts manualy
@@ -77,7 +78,7 @@ services:
     environment:
       SKIP_SETCAP: 1
       VAULT_TOKEN: ${VAULT_TOKEN}
-      VAULT_DEV_ROOT_TOKEN_ID: changeme
+      VAULT_DEV_ROOT_TOKEN_ID: ${VAULT_TOKEN}
       VAULT_ADDR: http://vault:8200
 
   tower:
