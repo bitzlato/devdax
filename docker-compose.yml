@@ -93,6 +93,8 @@ services:
       context: belomor/.
       args:
         RAILS_ENV: development
+    volumes:
+      - ./belomor:/home/app:cached
     environment:
       RAILS_ENV: development
       PEATIO_PUBLIC_KEY: ${PEATIO_PUBLIC_KEY}
