@@ -51,6 +51,7 @@ services:
       BASEAPP_PORT: 3002
       RANGO_PORT: 8090
       LIZA_PORT: 3003
+      BELOMOR_PORT: 3005
 
     # Good idea. But it does not work on macos because of https://docs.docker.com/docker-for-mac/networking/#there-is-no-docker0-bridge-on-macos
     # The better way it to set peatio.local and ws.local in /etc/hosts manualy
@@ -86,6 +87,20 @@ services:
       - ./config/tower.js:/home/app/env.js
     ports:
       - "8091:8080"
+
+  belomor:
+    build:
+      context: belomor/.
+      args:
+        RAILS_ENV: development
+    environment:
+      RAILS_ENV: development
+      PEATIO_PUBLIC_KEY: ${PEATIO_PUBLIC_KEY}
+      DATABASE_HOST: db
+      DATABASE_USER: postgres
+    command: bundle exec rails server -b 0.0.0.0
+    ports:
+      - '3005:3000'
 
 volumes:
   influx_data:

@@ -33,10 +33,10 @@ endif
 services: secrets stop_and_remove_services start_services init_vault
 
 stop_and_remove_services:
-	docker-compose rm -fsv
+	docker-compose rm -fsv db influxdb redis rabbitmq gateway vault tower
 
 start_services:
-	docker-compose up -Vd
+	docker-compose up -Vd db influxdb redis rabbitmq gateway vault tower
 	until $$(curl --output /dev/null --silent --head --fail localhost:8086/ping); do sleep 1; done
 	docker-compose exec -T influxdb bash -c "cat /influxdb.sql | influx"
 
@@ -93,6 +93,9 @@ start_rango:
 
 start_liza:
 	cd liza; bundle exec foreman start
+
+start_belomor:
+	docker compose up -V belomor
 
 app_baseapp:
 	cd baseapp; yarn rebuild
