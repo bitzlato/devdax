@@ -13,3 +13,6 @@
 [submodule "liza"]
 	path = liza
 	url = git@github.com:bitzlato/liza.git
+[submodule "belomor"]
+	path = belomor
+	url = git@github.com:bitzlato/belomor.git
