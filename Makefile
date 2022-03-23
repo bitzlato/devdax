@@ -33,7 +33,7 @@ endif
 services: secrets stop_and_remove_services start_services init_vault
 
 stop_and_remove_services:
-	docker-compose rm -fsv db influxdb redis rabbitmq gateway vault tower
+	docker-compose rm -fsv
 
 start_services:
 	docker-compose up -Vd db influxdb redis rabbitmq gateway vault tower
