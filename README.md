@@ -133,6 +133,16 @@ Look into your $PATH
 
 ### Troubleshoot
 
+#### Unsupported SSL version on Mac
+
+When you run make, you may encounter the following error:
+```
+WARNING: /Users/alex/.rvm/rubies/ruby-2.7.5/bin/ruby is loading libcrypto in an unsafe way
+zsh: abort      bin/rake db:reset
+```
+
+You need to install openssl@1.1 and solve with it [this link](https://stackoverflow.com/questions/38670295/homebrew-refusing-to-link-openssl)
+
 #### Vault
 
 If you have a problem like:
@@ -160,10 +170,6 @@ doesn't show you anything.
 Please setup your direnv:
 https://clck.ru/XR3pC
 
-#### Rails commands don't work in peatio on macOS
-
-See: https://github.com/se3000/ruby-eth/issues/47
-
 #### Failed to build gem pg
 
 ```
@@ -188,6 +194,7 @@ brew install libpq
 ```
 sudo apt-get install libpq-dev
 ```
+
 
 ### Why it is running on localhost:8080 not www.app.local?
 
@@ -216,7 +223,6 @@ Member.find_each do |member|
   member.get_account('usd').update_columns balance: 10000, locked: 1000
   member.get_account('btc').update_columns balance: 1, locked: 1
 end
-
 ```
 
 ### How to enable 2FA?

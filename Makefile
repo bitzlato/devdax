@@ -65,7 +65,7 @@ init_vault:
 
 start_baseapp:
 	echo -n -e "\033]0;baseapp\007"
-	cd baseapp; PORT=3002 yarn start:all
+	cd baseapp; nvm install; PORT=3002 yarn start:all
 
 start_baseapp_proxy:
 	echo -n -e "\033]0;baseapp_proxy\007"
