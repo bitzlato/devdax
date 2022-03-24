@@ -160,9 +160,14 @@ doesn't show you anything.
 Please setup your direnv:
 https://clck.ru/XR3pC
 
-#### Rails commands don't work in peatio on macOS
+#### Rails commands don't work in peatio on macOS Catalina
 
 See: https://github.com/se3000/ruby-eth/issues/47
+
+```
+ln -s /usr/local/opt/openssl/lib/libssl.dylib /usr/local/lib/
+ln -s /usr/local/opt/openssl/lib/libcrypto.dylib /usr/local/lib/
+```
 
 #### Failed to build gem pg
 
